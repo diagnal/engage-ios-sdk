@@ -1,0 +1,10 @@
+framework module engageCore {
+  umbrella header "engageCore-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module engageCore.Swift {
+    header "engageCore-Swift.h"
+}
