@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CampaignEventDelegate Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Protocol/CampaignEventDelegate" class="dashAnchor"></a>
+    <a title="CampaignEventDelegate Protocol Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (100% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        CampaignEventDelegate Protocol Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Engage.html">Engage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/EngageCampaign.html">EngageCampaign</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/NotificationData.html">NotificationData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Traits.html">Traits</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/CampaignType.html">CampaignType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/GENDER.html">GENDER</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/CampaignEventDelegate.html">CampaignEventDelegate</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>CampaignEventDelegate</h1>
+            
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP10engageCore21CampaignEventDelegate19onCampaignTriggeredFT8campaignCS_14EngageCampaign_Sb"></a>
+                    <a name="//apple_ref/swift/Method/onCampaignTriggered(campaign:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP10engageCore21CampaignEventDelegate19onCampaignTriggeredFT8campaignCS_14EngageCampaign_Sb">onCampaignTriggered(campaign:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+<ul>
+<li>Tells the delegate that specified campaign is about to trigger.</li>
+<li>This method gets called just before triggering the campaign</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">onCampaignTriggered</span><span class="p">(</span><span class="nv">campaign</span> <span class="p">:</span> <span class="kt"><a href="../Classes/EngageCampaign.html">EngageCampaign</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>campaign</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>an Instance of EngageCampaign</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Bool value that decides whether to trigger the campaign or not
+       Return true to show the campaign to user
+       Return false to avoid showing campaign to user</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP10engageCore21CampaignEventDelegate16onCampaignActionFT8campaignCS_14EngageCampaign_T_"></a>
+                    <a name="//apple_ref/swift/Method/onCampaignAction(campaign:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP10engageCore21CampaignEventDelegate16onCampaignActionFT8campaignCS_14EngageCampaign_T_">onCampaignAction(campaign:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+<ul>
+<li>Tells the delegate that user has interacted with campaign.</li>
+<li>This method gets called after user finished the campaign workflow.</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">onCampaignAction</span><span class="p">(</span><span class="nv">campaign</span> <span class="p">:</span> <span class="kt"><a href="../Classes/EngageCampaign.html">EngageCampaign</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>campaign</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>an Instance of EngageCampaign</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external">Diagnal</a>. All rights reserved. (Last updated: 2017-08-10)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
