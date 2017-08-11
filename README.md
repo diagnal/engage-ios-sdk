@@ -15,20 +15,20 @@ Dynamic Frameworks
 
 You should use one of these two ways to import the Engage iOS SDK but not multiple. Importing the SDK in multiple ways loads duplicate copies of the SDK into the project and causes compiler errors.
 
-#### CocoaPods
+#### CocoaPodsz
 
 1. The Engage iOS SDK for iOS is available through [CocoaPods](http://cocoapods.org). If you have not installed CocoaPods, install CocoaPods by running the command:
 
-$ gem install cocoapods
-$ pod setup
+`$ gem install cocoapods`
+`$ pod setup`
 
 Depending on your system settings, you may have to use `sudo` for installing `cocoapods` as follows:
 
-$ sudo gem install cocoapods
-$ pod setup
+`$ sudo gem install cocoapods`
+`$ pod setup`
 
 2. In your project directory (the directory where your `*.xcodeproj` file is), create a plain text file named `Podfile` (without any file extension) and add the lines below. Replace `YourTarget` with your actual target name.
-
+```swift
 source 'https://github.com/CocoaPods/Specs.git'
 
 platform :ios, '8.0'
@@ -38,6 +38,7 @@ target :'YourTarget' do
 pod 'engageCore'
 end
 
+```
 1. Then run the following command:
 
 $ pod install
@@ -48,9 +49,9 @@ $ pod install
 The entry point of the SDK is through the `Engage` class. We recommend initializing the client in the `application(_:didFinishLaunchingWithOptions:)
 ` your `UIApplicationDelegate` implementation class .
 ```swift
-Engage.initialize(application,didFinishLaunchingWithOptions: launchOptions, clientId: "ENGAGE_CLIENT_ID", projectId: "ENGAGE_PROJECT_ID", partitionKey: "ENGAGE_PARTITIONKEY")
+Engage.initialize(application,didFinishLaunchingWithOptions: launchOptions, clientId: "ENGAGE_CLIENT_ID", projectId: "ENGAGE_PROJECT_ID")
 ```
-`ENGAGE_CLIENT_ID`, `ENGAGE_PROJECT_ID` and `ENGAGE_PARTITIONKEY` can be obtained from your [Enage Dashboard](http://engage.diagnal.com )
+`ENGAGE_CLIENT_ID` and  `ENGAGE_PROJECT_ID`  can be obtained from your [Enage Dashboard](http://engage.diagnal.com )
 
 ## Usage
 ### Identify User
@@ -59,29 +60,31 @@ The `identify` method is how you associate your users and their actions to a rec
 Every arguments in the Trait `init` method are optionals.
 
 ```swift
-let trait = Traits(age: age,
-gender: genderValue,
-country: country,
-city: city,
-network: network,
-name: fullName,
-status: registrationStatus,
-id: userId,
-customTraits: customTraits)
-Engage.identify(trait)
-
+let traits = Traits(id: userId,
+                    name: fullName,
+                    email: email,
+                    gender: genderValue,
+                    age: age,
+                    status: registrationStatus,
+                    city: city,
+                    country: country,
+                    network: network,
+                    customTraits: customTraits)
+       
+Engage.identify(traits)
 ```
 If `Traits` is initialized without `userId`, user will be treated as anonymous.
 
 Example `identify` call:
 
-```swift
-let traits = Traits(age: 28,
-gender: GENDER.MALE,
-country: "India",
-name: "Sudeep",
-status: "subscribed",
-id: "4981498")                      
+```swift 
+let traits = Traits(id: "4981498",
+                    name: "Sudeep",
+                    gender: GENDER.MALE,
+                    age: 28,
+                    status: "subscribed",
+                    country: "India")
+
 Engage.identify(traits)
 ```
 
@@ -89,7 +92,7 @@ Engage.identify(traits)
 
 The `track` method lets you record any actions your users perform. You can see a track example in the guide or find details on the track method payload.
 
-```javascript
+```swift
 Engage.track("eventName", params: params)
 ```
 
@@ -125,6 +128,7 @@ return true
 }
 
 func onCampaignAction(campaign : EngageCampaign) {
+//use campaign object properties to perform appropriate actions in your roject
 }
 ```
 
@@ -133,7 +137,7 @@ Helper classes provides an easy way to integrate Engage iOS SDK `Engage.track("e
 
 We currently support FirebaseAnalytics. 
 
-To use helper class please add them to your project. Please find the helper class for Firebaseanalytics [here](http://engage.diagnal.com ).
+To use helper class please add them to your project. Please find the helper class for Firebaseanalytics [here](https://github.com/diagnal/engage-ios-sdk/tree/master/Helper%20Classes ).
 
 If you already integrated the FirebaseAnalytics , Just replace the calls that starts with `FIRAnalytics` with `EngageFIRAnalytics`.
 

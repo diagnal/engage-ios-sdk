@@ -103,21 +103,22 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 @class Traits;
 @class NSData;
 @class NotificationData;
-@class EngageCampaign;
 
 SWIFT_CLASS("_TtC10engageCore6Engage")
 @interface Engage : NSObject
 
-/// Call this function to initialize the engage SDK in the client application.
+/// Set the debug value as true to print all useful informations in console.
++ (BOOL)debug;
++ (void)setDebug:(BOOL)value;
+
+/// Initialize the engage SDK in the client application.
 ///
 /// \param application UIApplication Instance
 ///
 /// \param clientId ENGAGE_CLIENT_ID
 ///
 /// \param projectId ENGAGE_PROJECT_ID
-///
-/// \param partitionKey ENGAGE_PARTITION_KEY
-+ (void)initialize:(UIApplication * _Nonnull)application clientId:(NSString * _Nonnull)clientId projectId:(NSString * _Nonnull)projectId partitionKey:(NSString * _Nullable)partitionKey;
++ (void)initialize:(UIApplication * _Nonnull)application didFinishLaunchingWithOptions:(NSDictionary * _Nullable)launchOptions clientId:(NSString * _Nonnull)clientId projectId:(NSString * _Nonnull)projectId;
 
 /// Sets the user profile specific to current user
 ///
@@ -141,44 +142,43 @@ SWIFT_CLASS("_TtC10engageCore6Engage")
 /// \param enabled use true or false based on whether to show campaigns or not.
 + (void)setCampaignDialogsEnabled:(BOOL)enabled;
 
-/// Pass deviceToken to engage SDK after registering for push notifications.
+/// Register to engageSDK PushNotification Campaign Pass deviceToken to engage SDK after registering for push notifications.
 ///
 /// \param deviceToken deviceToken recieved from
 /// func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData)
 + (void)registerForRemoteNotificationsWithDeviceToken:(NSData * _Nonnull)deviceToken;
 
-/// Call this function when user recieves a notification.
+/// Inform Engage SDK When a notification is recieved.
 ///
 /// \param userInfo userInfo recieved from notification
 ///
 /// \returns  This function will return an Instance of NotificationData if the notification recieved was from engage,
-/// It will return a nil Value if the notification recieved was unknown to engageSDK.
+/// It will return a nil value if the notification is recieved from an unknown source.
 + (NotificationData * _Nullable)onNotificationRecieved:(NSDictionary * _Nonnull)userInfo;
 
-/// Call this method to inform engage sdk the notification is opened /interacted by user.
+/// Inform Engage SDK that the notification is Opened/Interacted by the user.
 ///
 /// \param userInfo userInfo recieved from notification
 ///
 /// \returns  This function will return an Instance of NotificationData if the notification recieved was from engage,
-/// It will return a nil Value if the notification recieved was unknown to engageSDK.
+/// It will return a nil value if the notification is recieved from an unknown source.
 + (NotificationData * _Nullable)onNotificationOpened:(NSDictionary * _Nonnull)userInfo;
 
-/// Shutdown the engage SDK. This method will clear all the user traits informations.
+/// Shutdown the engage SDK. All functionalities related to SDK wil be stopped immediately after calling this method. Eg. It will clear all the user traits informations,stop tracking events, stops campaigns etc. Inorder to start the SDK functionality again , client application must call identify(traits : Traits) method.
 + (void)shutDown;
-
-/// This method will help you to listen for the campaign events using the 2 closure arguments
-///
-/// \param onCampaignTriggered This closure will be called just before the campaign UI is shown to user
-/// User can pass true / false to based on whether to show campaign or not.
-///
-/// \param onCampaignAction This closure will be executed immediately after user is interacted with the campaign
-+ (void)registerForCampaignEvents:(BOOL (^ _Nullable)(EngageCampaign * _Nonnull))onCampaignTriggered onCampaignAction:(void (^ _Nullable)(EngageCampaign * _Nonnull))onCampaignAction;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
 SWIFT_CLASS("_TtC10engageCore14EngageCampaign")
 @interface EngageCampaign : NSObject
+
+/// The action string recieved from campaign
+@property (nonatomic, copy) NSString * _Nullable actionString;
+
+/// CampaignId of the current campaign
+@property (nonatomic, copy) NSString * _Nullable campaignId;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -188,13 +188,32 @@ SWIFT_CLASS("_TtC10engageCore14EngageCampaign")
 
 SWIFT_CLASS("_TtC10engageCore16NotificationData")
 @interface NotificationData : NSObject
+
+/// CampaignId recieved from the notification
 @property (nonatomic, readonly, copy) NSString * _Nullable campaignId;
+
+/// Type of Content
 @property (nonatomic, readonly, copy) NSString * _Nullable type;
+
+/// ContentId of the content
 @property (nonatomic, readonly, copy) NSString * _Nullable contentId;
+
+/// Push Notification title recieved from userInfo dictionary
 @property (nonatomic, readonly, copy) NSString * _Nullable title;
+
+/// Push Notification subTitle recieved from userInfo dictionary
 @property (nonatomic, readonly, copy) NSString * _Nullable subTitle;
+
+/// Push Notification message recieved from userInfo dictionary
 @property (nonatomic, readonly, copy) NSString * _Nullable message;
-@property (nonatomic, readonly, copy) NSString * _Nullable imageUrl;
+
+/// Bool value representing whether the campaign recieved is a preview campaign
+@property (nonatomic, readonly) BOOL isCampaignPreview;
+
+/// Campaign Id of preview campaign.
+@property (nonatomic, readonly, copy) NSString * _Nullable campaignPreviewId;
+
+/// Full notification dictionary.
 @property (nonatomic, readonly, copy) NSDictionary * _Nullable notificationUserInfo;
 
 /// Get instance of NotificationData from push notification userinfo dictionary.
@@ -208,13 +227,29 @@ SWIFT_CLASS("_TtC10engageCore16NotificationData")
 
 SWIFT_CLASS("_TtC10engageCore6Traits")
 @interface Traits : NSObject
+
+/// String representing user country name
 @property (nonatomic, copy) NSString * _Nullable country;
+
+/// emailID of user
 @property (nonatomic, copy) NSString * _Nullable email;
+
+/// String representing user city name
 @property (nonatomic, copy) NSString * _Nullable city;
+
+/// String representing user network
 @property (nonatomic, copy) NSString * _Nullable network;
+
+/// String name of user
 @property (nonatomic, copy) NSString * _Nullable name;
+
+/// String value representing registration Status of user.
 @property (nonatomic, copy) NSString * _Nullable status;
+
+/// String value representing UserID of user.
 @property (nonatomic, copy) NSString * _Nullable id;
+
+/// A [String : String] dictionary representing custom user prfile informations.
 @property (nonatomic, copy) NSDictionary<NSString *, NSString *> * _Nullable customTraits;
 @end
 
