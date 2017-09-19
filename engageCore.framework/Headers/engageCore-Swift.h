@@ -94,11 +94,189 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 #if defined(__has_feature) && __has_feature(modules)
 @import ObjectiveC;
 @import Foundation;
+@import SystemConfiguration;
 @import UIKit;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
+@class EngageEvent;
+
+
+/// EngageEvent creator for Advertisement playback events
+SWIFT_CLASS("_TtC10engageCore25AdvertisementEventCreator")
+@interface AdvertisementEventCreator : NSObject
+
+/// Intialize the event creator using specified content id and advertisement id
+///
+/// <ul><li>Parameters:</li><li>contentId: Identifier of the content in which ad is shown</li><li>advertisementId: Identifier of the advertisement being shown</li></ul>
+- (nonnull instancetype)initWithContentId:(NSString * _Nonnull)contentId advertisementId:(NSString * _Nonnull)advertisementId OBJC_DESIGNATED_INITIALIZER;
+
+/// Set the type of the advertisement being shown
+///
+/// \param type Type of the advertisement being shown
+///
+/// \returns  AdvertisementEventCreator object after updating the adType
+- (AdvertisementEventCreator * _Nonnull)putAdType:(NSString * _Nonnull)type;
+
+/// Set the total duration of the advertisement being shown
+///
+/// \param type duration of the advertisement being shown
+///
+/// \returns  AdvertisementEventCreator object after updating the adDuration
+- (AdvertisementEventCreator * _Nonnull)putAdDuration:(NSString * _Nonnull)duration;
+
+/// Set the progress of the advertisement being shown
+///
+/// \param type Progress of the advertisement being shown
+///
+/// \returns  AdvertisementEventCreator object after updating the adProgress
+- (AdvertisementEventCreator * _Nonnull)putAdProgress:(NSString * _Nonnull)type;
+
+/// Creates EngageEvent representing playback start event of the advertisement
+///
+/// \returns  EngageEvent representing playback start event of the advertisement
+- (EngageEvent * _Nonnull)onAdPlaybackStarted;
+
+/// Creates EngageEvent representing playback complete event of the advertisement
+///
+/// \returns  EngageEvent representing playback complete event of the advertisement
+- (EngageEvent * _Nonnull)onAdPlaybackCompleted;
+
+/// EngageEvent representing playback skip event of the advertisement
+///
+/// \returns  EngageEvent representing playback skip event of the advertisement
+- (EngageEvent * _Nonnull)onAdPlaybackSkipped;
+@end
+
+
+
+/// EngageEvent creator for Media Content events
+SWIFT_CLASS("_TtC10engageCore19ContentEventCreator")
+@interface ContentEventCreator : NSObject
+
+/// Initializes the event creator using specified content id
+///
+/// \param contentId Identifier of the content for which events are created
+- (nonnull instancetype)initWithContentId:(NSString * _Nonnull)contentId OBJC_DESIGNATED_INITIALIZER;
+
+/// Set the title of the content
+///
+/// \param title Title of the content
+///
+/// \returns  ContentEventCreator after updating title of content
+- (ContentEventCreator * _Nonnull)putTitle:(NSString * _Nonnull)title;
+
+/// Set the type of the content
+///
+/// \param type Type of the content Example: Movies, series, news etc.
+///
+/// \returns  ContentEventCreator after updating type of content
+- (ContentEventCreator * _Nonnull)putType:(NSString * _Nonnull)type;
+
+/// Set the source of the content
+///
+/// \param source Ex: search, section, category, favourite, recently-watched, download
+///
+/// \returns  ContentEventCreator after updating source of content
+- (ContentEventCreator * _Nonnull)putSource:(NSString * _Nonnull)source;
+
+/// Creates EngageEvent representing content view
+///
+/// \returns  EngageEvent representing content view
+- (EngageEvent * _Nonnull)onContentView;
+
+/// Creates EngageEvent representing content share
+///
+/// \returns  EngageEvent representing content share
+- (EngageEvent * _Nonnull)onContentShare;
+
+/// Creates EngageEvent representing content shared with another application
+///
+/// \param sharedWith External application with which content is shared
+///
+/// \returns  EngageEvent representing content shared with another application
+- (EngageEvent * _Nonnull)onContentShareWith:(NSString * _Nonnull)sharedWith;
+
+/// Creates EngageEvent representing content added favourites
+///
+/// \returns  EngageEvent representing content added favourites
+- (EngageEvent * _Nonnull)onContentAddedToFavourites;
+
+/// Creates EngageEvent representing content removed from favourites
+///
+/// \returns  EngageEvent representing content removed from favourites
+- (EngageEvent * _Nonnull)onContentFavouriteRemoved;
+
+/// Creates EngageEvent representing all content favourites cleared
+///
+/// \returns  EngageEvent representing all content favourites cleared
+- (EngageEvent * _Nonnull)onContentFavouritesCleared;
+@end
+
+
+
+/// EngageEvent creator for Content Download events
+SWIFT_CLASS("_TtC10engageCore20DownloadEventCreator")
+@interface DownloadEventCreator : NSObject
+
+/// Initializes the event creator using specified download content id
+///
+/// \param contentId identifier of the content
+- (nonnull instancetype)initWithContentId:(NSString * _Nonnull)contentId OBJC_DESIGNATED_INITIALIZER;
+
+/// Set the title of the content
+///
+/// \param title Title of the content
+///
+/// \returns  DownloadEventCreator object after updating title of content
+- (DownloadEventCreator * _Nonnull)putContentTitle:(NSString * _Nonnull)title;
+
+/// Set the type of the content
+///
+/// \param type Type of the content Example: Movies, series, news etc.
+///
+/// \returns  DownloadEventCreator object after updating type of content
+- (DownloadEventCreator * _Nonnull)putContentType:(NSString * _Nonnull)type;
+
+/// Set the source of the content
+///
+/// \param source Source of the content Example: Section, search, favourite, downloads etc.
+///
+/// \returns  DownloadEventCreator object after updating source of content
+- (DownloadEventCreator * _Nonnull)putContentSource:(NSString * _Nonnull)source;
+
+/// Creates EngageEvent representing content download started
+///
+/// \returns  EngageEvent representing content download started
+- (EngageEvent * _Nonnull)onDownloadStarted;
+
+/// Creates EngageEvent representing content download paused
+///
+/// \returns  EngageEvent representing content download paused
+- (EngageEvent * _Nonnull)onDownloadPaued;
+
+/// Creates EngageEvent representing content download resumed
+///
+/// \returns  EngageEvent representing content download resumed
+- (EngageEvent * _Nonnull)onDownloadResumed;
+
+/// Creates EngageEvent representing content download stopped
+///
+/// \returns  EngageEvent representing content download stopped
+- (EngageEvent * _Nonnull)onDownloadStopped;
+
+/// Creates EngageEvent representing content download completed
+///
+/// \returns  EngageEvent representing content download completed
+- (EngageEvent * _Nonnull)onDownloadCompleted;
+
+/// Creates EngageEvent representing content download error occurred
+///
+/// \returns  EngageEvent representing content download error occurred
+- (EngageEvent * _Nonnull)onDownloadError;
+@end
+
 @class UIApplication;
 @class Traits;
 @class NSData;
@@ -118,7 +296,7 @@ SWIFT_CLASS("_TtC10engageCore6Engage")
 /// \param clientId ENGAGE_CLIENT_ID
 ///
 /// \param projectId ENGAGE_PROJECT_ID
-+ (void)initialize:(UIApplication * _Nonnull)application didFinishLaunchingWithOptions:(NSDictionary * _Nullable)launchOptions clientId:(NSString * _Nonnull)clientId projectId:(NSString * _Nonnull)projectId;
++ (void)initialize:(UIApplication * _Nonnull)application didFinishLaunchingWithOptions:(NSDictionary * _Nullable)launchOptions accountId:(NSString * _Nonnull)accountId projectId:(NSString * _Nonnull)projectId;
 
 /// Sets the user profile specific to current user
 ///
@@ -135,12 +313,26 @@ SWIFT_CLASS("_TtC10engageCore6Engage")
 /// \param params Parameters of the event.
 + (void)track:(NSString * _Nonnull)eventName params:(NSDictionary * _Nonnull)params;
 
+/// Logs engage Default supported events to Engage. These events are used trigger campaigns, track app usage etc.
+///
+/// \param eventName name of the event
+///
+/// \param params Parameters of the event.
++ (void)track:(EngageEvent * _Nonnull)event;
+
 /// Enables or disables campaign dialogs in the app. Individual campaign dialogs may be handled separately by implementing registerForCampaignEvents.
 ///
 /// Campaign dialogs are enabled by default
 ///
 /// \param enabled use true or false based on whether to show campaigns or not.
 + (void)setCampaignDialogsEnabled:(BOOL)enabled;
+
+/// Enables or disables Developer Mode of EngageMent SDK.
+///
+/// ENABLE_CAPTURE_EVENTS is disabled by default
+///
+/// \param enabled set true or false to enable/disable ENABLE_CAPTURE_EVENTS is SDK.
++ (void)ENABLE_CAPTURE_EVENTS:(BOOL)enabled;
 
 /// Register to engageSDK PushNotification Campaign Pass deviceToken to engage SDK after registering for push notifications.
 ///
@@ -182,7 +374,32 @@ SWIFT_CLASS("_TtC10engageCore14EngageCampaign")
 @end
 
 
+
+/// Represents the event to be tracked using Engage.track(EngageEvent).
+SWIFT_CLASS("_TtC10engageCore11EngageEvent")
+@interface EngageEvent : NSObject
+
+/// Initializes an event with the specified name
+///
+/// \param aEventName Name of event
+- (nonnull instancetype)initWithAEventName:(NSString * _Nonnull)aEventName OBJC_DESIGNATED_INITIALIZER;
+
+/// Add an attribute to the event
+///
+/// \param name Name of the attribute
+///
+/// \param value Value of the attribute
+///
+/// \returns  EngageEvent object after adding the attribute
+- (EngageEvent * _Nonnull)addAttribute:(NSString * _Nonnull)name value:(id _Nonnull)value;
+@end
+
+
 @interface NSDate (SWIFT_EXTENSION(engageCore))
+@end
+
+
+@interface NSUserDefaults (SWIFT_EXTENSION(engageCore))
 @end
 
 
@@ -196,7 +413,7 @@ SWIFT_CLASS("_TtC10engageCore16NotificationData")
 @property (nonatomic, readonly, copy) NSString * _Nullable type;
 
 /// ContentId of the content
-@property (nonatomic, readonly, copy) NSString * _Nullable contentId;
+@property (nonatomic, readonly, copy) NSString * _Nullable url;
 
 /// Push Notification title recieved from userInfo dictionary
 @property (nonatomic, readonly, copy) NSString * _Nullable title;
@@ -225,17 +442,330 @@ SWIFT_CLASS("_TtC10engageCore16NotificationData")
 @end
 
 
+
+/// EngageEvent creator for Media Playback events
+SWIFT_CLASS("_TtC10engageCore18PlayerEventCreator")
+@interface PlayerEventCreator : NSObject
+
+/// Initializes the event creator using specified content id
+///
+/// \param contentId Identifier of the content for which events are created
+- (nonnull instancetype)initWithContentId:(NSString * _Nonnull)contentId OBJC_DESIGNATED_INITIALIZER;
+
+/// Set the type of the content
+///
+/// \param type Type of the content
+///
+/// \returns  PlayerEventCreator object after updating type of content
+- (PlayerEventCreator * _Nonnull)putContentType:(NSString * _Nonnull)type;
+
+/// Set the title of the content
+///
+/// \param title Title of the content
+///
+/// \returns  PlayerEventCreator object after updating type of content
+- (PlayerEventCreator * _Nonnull)putContentTitle:(NSString * _Nonnull)title;
+
+/// Set the mode by which content is played
+///
+/// \param mode Mode ,Example portrait, landscape, chrome cast, picture-in-picture etc.
+///
+/// \returns  PlayerEventCreator object after updating displayMode
+- (PlayerEventCreator * _Nonnull)putDisplayMode:(NSString * _Nonnull)mode;
+
+/// Set the duration of playback
+///
+/// \param duration Duration of playback
+///
+/// \returns  PlayerEventCreator object after updating duration
+- (PlayerEventCreator * _Nonnull)putDuration:(double)duration;
+
+/// Set the current video quality
+///
+/// \param videoQuality Video quality
+///
+/// \returns  PlayerEventCreator object after updating videoQuality
+- (PlayerEventCreator * _Nonnull)putContentVideoQuality:(NSString * _Nonnull)videoQuality;
+
+/// Set the progress of playback
+///
+/// \param progress Progress of playback
+///
+/// \returns  PlayerEventCreator object after updating progress of playback
+- (PlayerEventCreator * _Nonnull)putProgress:(double)progress;
+
+/// Set the playback starting timestamp
+///
+/// \param time Playback starting timestamp
+///
+/// \returns  PlayerEventCreator object after updating startTime of playback
+- (PlayerEventCreator * _Nonnull)putStartTime:(double)time;
+
+/// Set the playback ending timestamp
+///
+/// \param time Playback ending timestamp
+///
+/// \returns  PlayerEventCreator object after updating playback endTime
+- (PlayerEventCreator * _Nonnull)putEndTime:(double)time;
+
+/// Set the subtitle language
+///
+/// \param aLangCode Subtitle language
+///
+/// \returns  PlayerEventCreator object after updating subtitle language
+- (PlayerEventCreator * _Nonnull)putSubtitleLanguage:(NSString * _Nonnull)aLangCode;
+
+/// Set the audio language
+///
+/// \param aLangCode Audio language
+///
+/// \returns  PlayerEventCreator object after updating Audio language
+- (PlayerEventCreator * _Nonnull)putAudioLanguage:(NSString * _Nonnull)aLangCode;
+
+/// Set the content genre
+///
+/// \param genre Content genre
+///
+/// \returns  PlayerEventCreator object after updating content genre
+- (PlayerEventCreator * _Nonnull)putGenre:(NSString * _Nonnull)genre;
+
+/// Creates EngageEvent representing playback start
+///
+/// \returns  EngageEvent representing playback start
+- (EngageEvent * _Nonnull)onPlaybackStarted;
+
+/// Creates EngageEvent representing playback resume
+///
+/// \returns  EngageEvent representing playback resume
+- (EngageEvent * _Nonnull)onPlaybackResumed;
+
+/// Creates EngageEvent representing playback pause
+///
+/// \returns  EngageEvent representing playback pause
+- (EngageEvent * _Nonnull)onPlaybackPaused;
+
+/// Creates EngageEvent representing playback buffering
+///
+/// \returns  EngageEvent representing playback buffering
+- (EngageEvent * _Nonnull)onPlaybackBuffering;
+
+/// Creates EngageEvent representing playback seek
+///
+/// \returns  EngageEvent representing playback seek
+- (EngageEvent * _Nonnull)onPlaybackSeek;
+
+/// Creates EngageEvent representing playback stop
+///
+/// \returns  EngageEvent representing playback stop
+- (EngageEvent * _Nonnull)onPlaybackStopped;
+
+/// Creates EngageEvent representing playback complete
+///
+/// \returns  EngageEvent representing playback complete
+- (EngageEvent * _Nonnull)onPlaybackCompleted;
+
+/// Creates EngageEvent representing playback error
+///
+/// \returns  EngageEvent representing playback error
+- (EngageEvent * _Nonnull)onPlaybackError;
+
+/// Creates EngageEvent representing audio/video/subtitle track change
+///
+/// \returns  EngageEvent representing audio/video/subtitle track change
+- (EngageEvent * _Nonnull)onTrackChange;
+@end
+
+
+
+/// EngageEvent creator for Purchase events
+SWIFT_CLASS("_TtC10engageCore20PurchaseEventCreator")
+@interface PurchaseEventCreator : NSObject
+
+/// Initializes the event creator using specified product id
+///
+/// \param productId Identifier of the product for which events are created
+- (nonnull instancetype)initWithProductId:(NSString * _Nonnull)productId OBJC_DESIGNATED_INITIALIZER;
+
+/// Set the title of the product
+///
+/// \param title Title of the product
+///
+/// \returns  PurchaseEventCreator object after updating title of product
+- (PurchaseEventCreator * _Nonnull)putProductTitle:(NSString * _Nonnull)title;
+
+/// Set the price of the product
+///
+/// \param price Price of the product
+///
+/// \returns  PurchaseEventCreator object after updating price of product
+- (PurchaseEventCreator * _Nonnull)putProductPrice:(NSString * _Nonnull)price;
+
+/// Set the currency of price of the product
+///
+/// \param currency Currency of price of the product
+///
+/// \returns  PurchaseEventCreator object after updating Currency
+- (PurchaseEventCreator * _Nonnull)putCurrency:(NSString * _Nonnull)currency;
+
+/// Set the type of the product
+///
+/// \param type Type of the product
+///
+/// \returns  PurchaseEventCreator object after updating productType
+- (PurchaseEventCreator * _Nonnull)putProductType:(NSString * _Nonnull)type;
+
+/// Set the order id of the purchase
+///
+/// \param orderId Order id of the purchase
+///
+/// \returns  PurchaseEventCreator object after updating orderId
+- (PurchaseEventCreator * _Nonnull)putOrderId:(NSString * _Nonnull)orderId;
+
+/// Set the payment mode of the purchase
+///
+/// \param paymentMode Payment mode of the purchase
+///
+/// \returns  PurchaseEventCreator object after updating paymentMode
+- (PurchaseEventCreator * _Nonnull)putPaymentMode:(NSString * _Nonnull)paymentMode;
+
+/// Set the type of card used for the purchase
+///
+/// \param type Type of card used for the purchase
+///
+/// \returns  PurchaseEventCreator object after updating CardType
+- (PurchaseEventCreator * _Nonnull)putCardType:(NSString * _Nonnull)type;
+
+/// Set the name of bank used for the purchase
+///
+/// \param bankName Name of bank used for the purchase
+///
+/// \returns  PurchaseEventCreator object after updating bank name
+- (PurchaseEventCreator * _Nonnull)putBankName:(NSString * _Nonnull)bankName;
+
+/// Set the transaction id of payment
+///
+/// \param id Transaction id of payment
+///
+/// \returns  PurchaseEventCreator object after updating storeName
+- (PurchaseEventCreator * _Nonnull)putTransactionId:(NSString * _Nonnull)id;
+
+/// Set the store name used for payment
+///
+/// \param storeName Store name used for payment
+///
+/// \returns  PurchaseEventCreator object after updating transactionId
+- (PurchaseEventCreator * _Nonnull)putStoreName:(NSString * _Nonnull)storeName;
+
+/// Set the promo-code used in the product
+///
+/// \param promoCode Promo-code used in the product
+///
+/// \returns  PurchaseEventCreator object after updating Promo-code
+- (PurchaseEventCreator * _Nonnull)putPromoCode:(NSString * _Nonnull)promoCode;
+
+/// Set the original order id of the purchase
+///
+/// \param id Order id of the purchase
+///
+/// \returns  PurchaseEventCreator object after updating Order Id
+- (PurchaseEventCreator * _Nonnull)putOriginalOrderId:(NSString * _Nonnull)id;
+
+/// Set the original transaction id of payment
+///
+/// \param id Transaction id of payment
+///
+/// \returns  PurchaseEventCreator object after updating transactionId
+- (PurchaseEventCreator * _Nonnull)putOriginalTransactionId:(NSString * _Nonnull)id;
+
+/// Set the product validity days
+///
+/// \param validityDays Product validity days
+///
+/// \returns  PurchaseEventCreator object after updating validityDays
+- (PurchaseEventCreator * _Nonnull)putValidityDays:(NSString * _Nonnull)validityDays;
+
+/// Set the product validity remaining days
+///
+/// \param remainingDays Product validity remaining days
+///
+/// \returns  PurchaseEventCreator object after updating validity remaining days
+- (PurchaseEventCreator * _Nonnull)putRemainingDays:(NSString * _Nonnull)remainingDays;
+
+/// Creates EngageEvent representing product selection
+///
+/// \returns  EngageEvent representing product selection
+- (EngageEvent * _Nonnull)onProductSelected;
+
+/// Creates EngageEvent representing product checkout
+///
+/// \returns  EngageEvent representing product checkout
+- (EngageEvent * _Nonnull)onProductCheckout;
+
+/// Creates EngageEvent representing product renewal
+///
+/// \returns  EngageEvent representing product renewal
+- (EngageEvent * _Nonnull)onProductRenew;
+
+/// Creates EngageEvent representing product upgrade
+///
+/// \returns  EngageEvent representing product upgrade
+- (EngageEvent * _Nonnull)onProductUpgrade;
+
+/// Creates EngageEvent representing product checkout success
+///
+/// \returns  EngageEvent representing product checkout success
+- (EngageEvent * _Nonnull)onProductCheckoutSuccess;
+
+/// Creates EngageEvent representing product checkout failure
+///
+/// \returns  EngageEvent representing product checkout failure
+- (EngageEvent * _Nonnull)onProductCheckoutFailed;
+@end
+
+@class NSNotificationCenter;
+
+SWIFT_CLASS("_TtC10engageCore12Reachability")
+@interface Reachability : NSObject
+@property (nonatomic, copy) void (^ _Nullable whenReachable)(Reachability * _Nonnull);
+@property (nonatomic, copy) void (^ _Nullable whenUnreachable)(Reachability * _Nonnull);
+@property (nonatomic) BOOL reachableOnWWAN;
+@property (nonatomic, strong) NSNotificationCenter * _Nonnull notificationCenter;
+@property (nonatomic, readonly, copy) NSString * _Nonnull currentReachabilityString;
+- (nonnull instancetype)initWithReachabilityRef:(SCNetworkReachabilityRef _Nonnull)reachabilityRef OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithHostname:(NSString * _Nonnull)hostname error:(NSError * _Nullable * _Null_unspecified)error;
++ (Reachability * _Nullable)reachabilityForInternetConnectionAndReturnError:(NSError * _Nullable * _Null_unspecified)error;
++ (Reachability * _Nullable)reachabilityForLocalWiFiAndReturnError:(NSError * _Nullable * _Null_unspecified)error;
+- (BOOL)startNotifierAndReturnError:(NSError * _Nullable * _Null_unspecified)error;
+- (void)stopNotifier;
+- (BOOL)isReachable;
+- (BOOL)isReachableViaWWAN;
+- (BOOL)isReachableViaWiFi;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+@end
+
+
+
+/// EngageEvent creator for search events
+SWIFT_CLASS("_TtC10engageCore18SearchEventCreator")
+@interface SearchEventCreator : NSObject
+
+/// Initialize the event creator for search events
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+
+/// Creates EngageEvent representing the search event
+///
+/// \param keyword Search keyword
+///
+/// \returns  EngageEvent representing the search event
+- (EngageEvent * _Nonnull)onSearch:(NSString * _Nonnull)keyword;
+@end
+
+
 SWIFT_CLASS("_TtC10engageCore6Traits")
 @interface Traits : NSObject
 
-/// String representing user country name
-@property (nonatomic, copy) NSString * _Nullable country;
-
 /// emailID of user
 @property (nonatomic, copy) NSString * _Nullable email;
-
-/// String representing user city name
-@property (nonatomic, copy) NSString * _Nullable city;
 
 /// String representing user network
 @property (nonatomic, copy) NSString * _Nullable network;
@@ -251,6 +781,7 @@ SWIFT_CLASS("_TtC10engageCore6Traits")
 
 /// A [String : String] dictionary representing custom user prfile informations.
 @property (nonatomic, copy) NSDictionary<NSString *, NSString *> * _Nullable customTraits;
+@property (nonatomic, copy) NSString * _Nullable phoneNumber;
 @end
 
 
@@ -259,6 +790,33 @@ SWIFT_CLASS("_TtC10engageCore6Traits")
 
 
 @interface UIViewController (SWIFT_EXTENSION(engageCore))
+@end
+
+
+
+/// EngageEvent creator for User events Identify should be called prior to logging user events to track latest user attributes.
+SWIFT_CLASS("_TtC10engageCore16UserEventCreator")
+@interface UserEventCreator : NSObject
+
+/// Initializes the event creator for user events
+///
+/// \param userId userId of user
+- (nonnull instancetype)initWithUserId:(NSString * _Nonnull)userId OBJC_DESIGNATED_INITIALIZER;
+
+/// Creates EngageEvent representing user sign-up
+///
+/// \returns  EngageEvent representing user sign-up
+- (EngageEvent * _Nonnull)onUserRegistered;
+
+/// Creates EngageEvent representing user login
+///
+/// \returns  EngageEvent representing user login
+- (EngageEvent * _Nonnull)onUserLogin;
+
+/// Creates EngageEvent representing user logout
+///
+/// \returns  EngageEvent representing user logout
+- (EngageEvent * _Nonnull)onUserLogout;
 @end
 
 #pragma clang diagnostic pop

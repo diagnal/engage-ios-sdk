@@ -1,5 +1,5 @@
 framework module engageCore {
-  umbrella header "engageCore-umbrella.h"
+  umbrella header "engageCore.h"
 
   export *
   module * { export * }
