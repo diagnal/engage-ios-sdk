@@ -1,0 +1,10 @@
+framework module engageCoreServiceExtension {
+  umbrella header "engageCoreServiceExtension.h"
+
+  export *
+  module * { export * }
+}
+
+module engageCoreServiceExtension.Swift {
+    header "engageCoreServiceExtension-Swift.h"
+}
