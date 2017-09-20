@@ -6,8 +6,7 @@ Pod::Spec.new do |s|
   s.homepage = 'https://github.com/diagnal/engage-ios-sdk'
   s.summary = 'The EngageCore iOS SDK for App Personalization and Engagement.'
   s.source = { :git => 'https://github.com/diagnal/engage-ios-sdk.git' , :tag => s.version.to_s }
-  s.vendored_frameworks = 'engageCore.framework'
-  #s.ios.deployment_target = "8.0"
+  s.ios.vendored_frameworks = 'engageCore.framework'
   s.platform     = :ios, '8.0'
   s.requires_arc = true
   s.dependency "Alamofire", '~> 3.5.0'
