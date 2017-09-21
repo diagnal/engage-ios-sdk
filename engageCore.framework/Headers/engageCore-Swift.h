@@ -151,6 +151,15 @@ SWIFT_CLASS("_TtC10engageCore25AdvertisementEventCreator")
 
 
 
+/// <#Description#>
+SWIFT_CLASS("_TtC10engageCore23ApplicationEventCreator")
+@interface ApplicationEventCreator : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (EngageEvent * _Nonnull)onAppLaunch;
+@end
+
+
+
 /// EngageEvent creator for Media Content events
 SWIFT_CLASS("_TtC10engageCore19ContentEventCreator")
 @interface ContentEventCreator : NSObject
@@ -403,6 +412,15 @@ SWIFT_CLASS("_TtC10engageCore11EngageEvent")
 @end
 
 
+SWIFT_CLASS("_TtC10engageCore19NotificationActions")
+@interface NotificationActions : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nullable identifier;
+@property (nonatomic, readonly, copy) NSString * _Nullable title;
+@property (nonatomic, readonly, copy) NSString * _Nullable actionString;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 SWIFT_CLASS("_TtC10engageCore16NotificationData")
 @interface NotificationData : NSObject
 
@@ -429,6 +447,7 @@ SWIFT_CLASS("_TtC10engageCore16NotificationData")
 
 /// Campaign Id of preview campaign.
 @property (nonatomic, readonly, copy) NSString * _Nullable campaignPreviewId;
+@property (nonatomic, readonly, copy) NSArray<NotificationActions *> * _Nullable notificationActions;
 
 /// Full notification dictionary.
 @property (nonatomic, readonly, copy) NSDictionary * _Nullable notificationUserInfo;
