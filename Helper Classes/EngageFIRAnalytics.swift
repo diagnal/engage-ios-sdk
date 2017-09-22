@@ -1,9 +1,9 @@
 //
 //  EngageFIRAnalytics.swift
-//  play-ios
+//  engage-ios-sdk
 //
 //  Created by Sudeep George on 04/08/17.
-//  Copyright © 2017 ALT. All rights reserved.
+//  Copyright © 2017 Diagnal. All rights reserved.
 //
 
 import UIKit
