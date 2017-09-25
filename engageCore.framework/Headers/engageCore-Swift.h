@@ -94,7 +94,6 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 #if defined(__has_feature) && __has_feature(modules)
 @import ObjectiveC;
 @import Foundation;
-@import SystemConfiguration;
 @import UIKit;
 #endif
 
@@ -295,8 +294,8 @@ SWIFT_CLASS("_TtC10engageCore6Engage")
 @interface Engage : NSObject
 
 /// Set the debug value as true to print all useful informations in console.
-+ (BOOL)debug;
-+ (void)setDebug:(BOOL)value;
++ (BOOL)ENABLE_LOGGING;
++ (void)setENABLE_LOGGING:(BOOL)value;
 
 /// Initialize the engage SDK in the client application.
 ///
@@ -305,7 +304,9 @@ SWIFT_CLASS("_TtC10engageCore6Engage")
 /// \param clientId ENGAGE_CLIENT_ID
 ///
 /// \param projectId ENGAGE_PROJECT_ID
-+ (void)initialize:(UIApplication * _Nonnull)application didFinishLaunchingWithOptions:(NSDictionary * _Nullable)launchOptions accountId:(NSString * _Nonnull)accountId projectId:(NSString * _Nonnull)projectId;
+///
+/// \param customCSSUrl CSS url for customizing Campaign UI
++ (void)initialize:(UIApplication * _Nonnull)application didFinishLaunchingWithOptions:(NSDictionary * _Nullable)launchOptions accountId:(NSString * _Nonnull)accountId projectId:(NSString * _Nonnull)projectId customCSSUrl:(NSString * _Nullable)customCSSUrl;
 
 /// Sets the user profile specific to current user
 ///
@@ -739,27 +740,6 @@ SWIFT_CLASS("_TtC10engageCore20PurchaseEventCreator")
 ///
 /// \returns  EngageEvent representing product checkout failure
 - (EngageEvent * _Nonnull)onProductCheckoutFailed;
-@end
-
-@class NSNotificationCenter;
-
-SWIFT_CLASS("_TtC10engageCore12Reachability")
-@interface Reachability : NSObject
-@property (nonatomic, copy) void (^ _Nullable whenReachable)(Reachability * _Nonnull);
-@property (nonatomic, copy) void (^ _Nullable whenUnreachable)(Reachability * _Nonnull);
-@property (nonatomic) BOOL reachableOnWWAN;
-@property (nonatomic, strong) NSNotificationCenter * _Nonnull notificationCenter;
-@property (nonatomic, readonly, copy) NSString * _Nonnull currentReachabilityString;
-- (nonnull instancetype)initWithReachabilityRef:(SCNetworkReachabilityRef _Nonnull)reachabilityRef OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithHostname:(NSString * _Nonnull)hostname error:(NSError * _Nullable * _Null_unspecified)error;
-+ (Reachability * _Nullable)reachabilityForInternetConnectionAndReturnError:(NSError * _Nullable * _Null_unspecified)error;
-+ (Reachability * _Nullable)reachabilityForLocalWiFiAndReturnError:(NSError * _Nullable * _Null_unspecified)error;
-- (BOOL)startNotifierAndReturnError:(NSError * _Nullable * _Null_unspecified)error;
-- (void)stopNotifier;
-- (BOOL)isReachable;
-- (BOOL)isReachableViaWWAN;
-- (BOOL)isReachableViaWiFi;
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
 @end
 
 
