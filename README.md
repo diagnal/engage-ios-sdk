@@ -8,7 +8,7 @@ Engage iOS SDK requires iOS 8.0 or higher.
 Engage iOS SDK now support swift 2.3 only.
 
 ## Resources
- - [engageCore Docs](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/index.html)
+ - [engageCore Docs](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/Engage.html)
  - [engageExtensions Docs](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engageCoreServiceExtension-sdk-docs/index.html)
 
 ## Getting Started
@@ -19,7 +19,6 @@ Manual
 You should use one of these two ways to import the Engage iOS SDK but not multiple. Importing the SDK in multiple ways loads duplicate copies of the SDK into the project and causes compiler errors.
 
 #### CocoaPods
-
 1. The Engage iOS SDK for iOS is available through [CocoaPods](http://cocoapods.org). If you have not installed CocoaPods, install CocoaPods by running the command:
 
 `$ gem install cocoapods`
@@ -27,8 +26,8 @@ You should use one of these two ways to import the Engage iOS SDK but not multip
 
 Depending on your system settings, you may have to use `sudo` for installing `cocoapods` as follows:
 
-`$ sudo gem install cocoapods`
-`$ pod setup`
+	`$ sudo gem install cocoapods`
+	`$ pod setup`
 
 2. In your project directory (the directory where your `*.xcodeproj` file is), create a plain text file named `Podfile` (without any file extension) and add the lines below. Replace `YourTarget` with your actual target name.
 ```swift
@@ -49,7 +48,7 @@ end
 1. Open up `*.xcworkspace` with Xcode and start using the SDK.
 
 ### Step 2:  Initialize the Client
-The entry point of the SDK is through the `Engage` class. We recommend initializing the client in the `application(_:didFinishLaunchingWithOptions:)` in your `UIApplicationDelegate` implementation class .
+The entry point of the SDK is through the [`Engage`](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/Engage.html) class. We recommend initializing the client in the `application(_:didFinishLaunchingWithOptions:)` in your `UIApplicationDelegate` implementation class .
 ```swift
 Engage.initialize(application,didFinishLaunchingWithOptions: launchOptions, clientId: "ENGAGE_CLIENT_ID", projectId: "ENGAGE_PROJECT_ID")
 ```
@@ -58,7 +57,7 @@ Engage.initialize(application,didFinishLaunchingWithOptions: launchOptions, clie
 ## Usage
 ### Identify User
 
-The `identify` method is how you associate your users and their actions to a recognizable `userId` and `Traits`.
+The `identify` method is how you associate your users and their actions to a recognizable `userId` and [`Traits`](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/Traits.html).
 Every arguments in the Trait `init` method are optionals.
 
 ```swift
@@ -75,7 +74,7 @@ let traits = Traits(id: userId,
        
 Engage.identify(traits)
 ```
-If `Traits` is initialized without `userId`, user will be treated as anonymous.
+If [`Traits`](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/Traits.html) is initialized without `userId`, user will be treated as anonymous.
 
 Example `identify` call:
 
@@ -130,14 +129,14 @@ Engage iOS SDK support the following event creators:
 
 | Event Creator                 | Description
 | ----------------------------- | --------------------------------
-| `ApplicationEventCreator` 	|Event creator for Application Events events
-| `AdvertisementEventCreator` 	|Event creator for Advertisement playback events
-| `ContentEventCreator` 		|Event creator for Media Content events
-| `DownloadEventCreator` 		|Event creator for Content Download events
-| `PlayerEventCreator` 			|Event creator for Media Playback events
-| `PurchaseEventCreator` 		|Event creator for Purchase events
-| `SearchEventCreator` 			|Event creator for Search events
-| `UserEventCreator` 			|Event creator for User events
+| [`ApplicationEventCreator`](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/ApplicationEventCreator.html) 	|Event creator for Application Events events
+| [`AdvertisementEventCreator`](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/AdvertisementEventCreator.html) 	|Event creator for Advertisement playback events
+| [`ContentEventCreator`](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/ContentEventCreator.html) 		|Event creator for Media Content events
+|[`DownloadEventCreator`](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/DownloadEventCreator.html) 		|Event creator for Content Download events
+| [`PlayerEventCreator`](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/PlayerEventCreator.html) 			|Event creator for Media Playback events
+| [`PurchaseEventCreator`](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/PurchaseEventCreator.html) 		|Event creator for Purchase events
+| [`SearchEventCreator`](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/SearchEventCreator.html) 			|Event creator for Search events
+| [`UserEventCreator`](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/UserEventCreator.html) 			|Event creator for User events
 
 **Note**: In order to track AppLaunch events , you should call the  `ApplicationEventCreator` `onAppLaunch()` event from the `application(_:didFinishLaunchingWithOptions:)` inside the `UIApplicationDelegate` implementation class .
 
@@ -178,11 +177,10 @@ To make the push notification campaigns work in Engage ,  you need to configure 
 
  **Step 2** :  You need to register for remote notifications from UIApplicationDelegate ```didFinishLaunchingWithOptions``` method.
 ```swift
-func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
-{
-let settings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-application.registerUserNotificationSettings(settings)
-application.registerForRemoteNotifications()
+func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+	let settings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+	application.registerUserNotificationSettings(settings)
+	application.registerForRemoteNotifications()
 }
 ```
   
@@ -191,7 +189,7 @@ application.registerForRemoteNotifications()
 //Register remote notifications from engage. 
 func application(application: UIApplication, 					    didRegisterForRemoteNotificationsWithDeviceToken 
 deviceToken: NSData) {
-Engage.registerForRemoteNotificationsWithDeviceToken(deviceToken)
+	Engage.registerForRemoteNotificationsWithDeviceToken(deviceToken)
 }
 ```
 ### Inform Engage SDK Notification received/opened event
@@ -199,7 +197,7 @@ Engage.registerForRemoteNotificationsWithDeviceToken(deviceToken)
 Engage uses silent push notifications for push notification campaigns.
 In order to make the engage push notification campaign work , you need to  inform Engage SDK about the notification is received/opened event at your end.
 
-You can use   ```Engage.onNotificationRecieved(userInfo)``` and ```Engage.onNotificationOpened(userInfo)``` to inform Engage SDK about notification received/opened. Both these method will be returning a not nil object of NotificationData, if notification received is an engage notification.  If it returns a non nil NotificationData object , you can easily skip processing those notifications in your applications.
+You can use   ```Engage.onNotificationRecieved(userInfo)``` and ```Engage.onNotificationOpened(userInfo)``` to inform Engage SDK about notification received/opened. Both these method will be returning a not nil object of [```NotificationData```](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/NotificationData.html), if notification received is an engage notification.  If it returns a non nil [NotificationData](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/NotificationData.html) object , you can easily skip processing those notifications in your applications.
 
 **Step 1** : Implement ```application(_:didReceiveRemoteNotification:fetchCompletionHandler:)``` method  in UIApplicationDelegate.
 
@@ -331,7 +329,14 @@ Call completion handler if you want to display the notification even if the user
 } 
 ```
 
+### Support for UNNotificationContentExtension 
+If you want to customise the UI of rich push notification ,  you are allowed to do that by integrating UNNotificationContentExtension in your applications.
 
+To invoke UNNotificationContentExtension when engage push notification fires , you need to add UNNotificationExtensionCategory in the info.plist of  UNNotificationContentExtension. 
+
+```UNNotificationExtensionCategory```  used by EngageSDK for all rich push notifications is ```engage.notifications```
+
+For more details regarding UNNotificationContentExtension please refer [apple documentation](https://developer.apple.com/documentation/usernotificationsui/unnotificationcontentextension)
 ## Helper Classes
 Helper classes provides an easy way to integrate Engage iOS SDK `Engage.track("eventName", params: params)`  if you are already using an event analytics framework
 
@@ -344,8 +349,4 @@ If you already integrated the FirebaseAnalytics , Just replace the calls that st
 Example :
 `FIRAnalytics.logEventWithName(name, parameters: parameters)`   with 
 `EngageFIRAnalytics.logEventWithName(name, parameters: parameters)`
-
-
-
-
 
