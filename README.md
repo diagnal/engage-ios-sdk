@@ -328,6 +328,13 @@ Call completion handler if you want to display the notification even if the user
 }  
 } 
 ```
+### ShutDown User
+If a user logouts from your application , you need to inform the Engage SDK to stop tracking events as current user.
+
+Inorder to stop tracking current user you need to call ```Engage.shutDown()```
+
+After you call shutdown , all the event tracking will be disable by EngageSDK till you call the identify again.
+When a new user logins OR if you want to track anonymous users ,  you need to call ```Engage.identify(traits)``` again.
 
 ### Support for UNNotificationContentExtension 
 If you want to customise the UI of rich push notification ,  you are allowed to do that by integrating UNNotificationContentExtension in your applications.
