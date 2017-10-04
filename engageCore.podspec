@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.summary = 'The EngageCore iOS SDK for App Personalization and Engagement.'
   s.source = { :git => 'https://github.com/diagnal/engage-ios-sdk.git' , branch: 'swift_3.0' , :tag => s.version.to_s }
   s.ios.vendored_frameworks = 'engageCore.framework'
-  s.platform     = :ios, '9.0'
+  s.platform     = :ios, '8.0'
   s.requires_arc = true
   s.dependency "Alamofire" , '>= 4.0.0', '<= 4.4.0'
   s.dependency "AlamofireObjectMapper"
