@@ -5,7 +5,10 @@ It promotes content to users and access customer sentiment.
 
 Engage iOS SDK allows easy integration of Engage to your iOS application in a few steps.
 Engage iOS SDK requires iOS 8.0 or higher.
-Engage iOS SDK now support swift 2.3 only.
+Engage iOS SDK now support swift 2.3 and swift 3.
+
+**Swift 2.3 Latest library version : 2.0.0**
+**Swift 3.0 Latest library version : 3.0.0**
 
 ## Resources
  - [engageCore Docs](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/Engage.html)
@@ -50,9 +53,16 @@ end
 ### Step 2:  Initialize the Client
 The entry point of the SDK is through the [`Engage`](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/Engage.html) class. We recommend initializing the client in the `application(_:didFinishLaunchingWithOptions:)` in your `UIApplicationDelegate` implementation class .
 ```swift
-Engage.initialize(application,didFinishLaunchingWithOptions: launchOptions, clientId: "ENGAGE_CLIENT_ID", projectId: "ENGAGE_PROJECT_ID")
+//Swift 2.3
+Engage.initialize(application,didFinishLaunchingWithOptions: launchOptions, accountId: "ENGAGE_ACCOUNT_ID", projectId: "ENGAGE_PROJECT_ID")
+
+//Swift 3.0
+Engage.initialize(application: application,
+didFinishLaunchingWithOptions:launchOptions,
+accountId: "ENGAGE_ACCOUNT_ID",
+projectId: "ENGAGE_PROJECT_ID")
 ```
-`ENGAGE_CLIENT_ID` and  `ENGAGE_PROJECT_ID`  can be obtained from your [Enage Dashboard](http://engage.diagnal.com )
+`ENGAGE_ACCOUNT_ID` and  `ENGAGE_PROJECT_ID`  can be obtained from your [Enage Dashboard](http://engage.diagnal.com )
 
 ## Usage
 ### Identify User
@@ -71,8 +81,11 @@ let traits = Traits(id: userId,
                     country: country,
                     network: network,
                     customTraits: customTraits)
-       
+//Swift 2.3
 Engage.identify(traits)
+
+//Swift 3.0
+Engage.identify(traits: traits)
 ```
 If [`Traits`](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/Traits.html) is initialized without `userId`, user will be treated as anonymous.
 
@@ -86,7 +99,12 @@ let traits = Traits(id: "4981498",
                     status: "subscribed",
                     country: "India")
 
+//Swift 2.3
 Engage.identify(traits)
+
+//Swift 3.0
+Engage.identify(traits: traits)
+
 ```
 
 ### Track
@@ -94,7 +112,12 @@ Engage.identify(traits)
 The `track` method lets you record any actions your users perform. You can see a track example in the guide or find details on the track method payload.
 
 ```swift
+//Swift 2.3
 Engage.track("eventName", params: params)
+
+//Swift 3.0
+Engage.track(eventName: "eventName", params: params)
+
 ```
 
 The `track`  method has the following parameters:
@@ -107,21 +130,33 @@ The `track`  method has the following parameters:
 Example `track` call:
 
 ```swift
+//Swift 2.3
 var params = [NSObject : AnyObject]()
 params["content_title"] = "How to Create a Tracking Plan"
 params["content_id"] = "1234"
 Engage.track("play_content", params: params)
+
+//Swift 3.0
+var params = [AnyHashable : Any]()
+params["content_title"] = "How to Create a Tracking Plan"
+params["content_id"] = "1234"
+Engage.track(eventName: "play_content", params: params)
 ```
 
 #### Using built-in events
 Engage iOS SDK pre-built Events gives you the ability to track the specific actions and events in your app that are most commonly used.
 For example, the content view event can be logged as follows:
 ```swift
- let eventCreator = ContentEventCreator(contentId: "series_2332")
+//Swift 2.3
+let eventCreator = ContentEventCreator(contentId: "series_2332")
  eventCreator.putType("series")
 			 .putTitle("Game of thrones")
 			 .putSource("Details page")
 Engage.track(event.onContentView())
+
+//Swift 3.0
+let eventCreator = ContentEventCreator.init(contentId: contentID!).putType(type: "Movie").putTitle(title:  "Test Title")
+Engage.track(event: event.onContentView())
             
 ```
 
@@ -141,7 +176,12 @@ Engage iOS SDK support the following event creators:
 **Note**: In order to track AppLaunch events , you should call the  `ApplicationEventCreator` `onAppLaunch()` event from the `application(_:didFinishLaunchingWithOptions:)` inside the `UIApplicationDelegate` implementation class .
 
 ```swift
+//Swift 2.3
 Engage.track(ApplicationEventCreator().onAppLaunch())
+
+//Swift 3.0
+Engage.track(event: ApplicationEventCreator().onAppLaunch())
+
 ```
 
 ### Campaigns
@@ -149,7 +189,12 @@ Campaigns are triggered by the SDK on events that are defined in the campaign pa
 You can register a  `CampaignEventDelegate` to know when a campaign is triggered and obtain an action-string based on user interaction with the campaign.
 
 ```swift
+//Swift 2.3
 Engage.registerForCampaignEvents(campaignEventDelegateImpl)
+
+//Swift 3.0
+Engage.registerForCampaignEvents(campaignEventDelegate: self)
+
 ```
 
 `CampaignEventDelegate` should be implemented by `CampaignEventDelegateImpl` Object.
@@ -177,19 +222,35 @@ To make the push notification campaigns work in Engage ,  you need to configure 
 
  **Step 2** :  You need to register for remote notifications from UIApplicationDelegate ```didFinishLaunchingWithOptions``` method.
 ```swift
+//swift2.3
 func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 	let settings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
 	application.registerUserNotificationSettings(settings)
 	application.registerForRemoteNotifications()
 }
+
+//Swift 3.0
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
+            (granted, error) in
+            if granted {
+                application.registerForRemoteNotifications()
+            }
+        }
+}
 ```
   
 **Step 3 : ** If register for push notifications is successful, you will recieve a call back in the UIApplicationDelegate ```didRegisterForRemoteNotificationsWithDeviceToken``` method. Next Step is , You need to register for remote notifications from  Engage using method ```Engage.registerForRemoteNotificationsWithDeviceToken(deviceToken)```
 ```swift
+//Swift 2.3
 //Register remote notifications from engage. 
 func application(application: UIApplication, 					    didRegisterForRemoteNotificationsWithDeviceToken 
 deviceToken: NSData) {
 	Engage.registerForRemoteNotificationsWithDeviceToken(deviceToken)
+}
+
+//Swift 3.0
+func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {      Engage.registerForRemoteNotificationsWithDeviceToken(deviceToken: deviceToken)
 }
 ```
 ### Inform Engage SDK Notification received/opened event
@@ -197,7 +258,22 @@ deviceToken: NSData) {
 Engage uses silent push notifications for push notification campaigns.
 In order to make the engage push notification campaign work , you need to  inform Engage SDK about the notification is received/opened event at your end.
 
-You can use   ```Engage.onNotificationRecieved(userInfo)``` and ```Engage.onNotificationOpened(userInfo)``` to inform Engage SDK about notification received/opened. Both these method will be returning a not nil object of [```NotificationData```](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/NotificationData.html), if notification received is an engage notification.  If it returns a non nil [NotificationData](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/NotificationData.html) object , you can easily skip processing those notifications in your applications.
+You can use  
+```swift 
+//Swift 2.3
+Engage.onNotificationRecieved(userInfo)
+//Swift 3.0  
+Engage.onNotificationRecieved(userInfo: userInfo)
+``` 
+and 
+```swift 
+//Swift 2.3
+Engage.onNotificationOpened(userInfo)
+
+//Swift 3.0
+Engage.onNotificationRecieved(userInfo: userInfo)
+``` 
+to inform Engage SDK about notification received/opened. Both these method will be returning a not nil object of [```NotificationData```](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/NotificationData.html), if notification received is an engage notification.  If it returns a non nil [NotificationData](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/NotificationData.html) object , you can easily skip processing those notifications in your applications.
 
 **Step 1** : Implement ```application(_:didReceiveRemoteNotification:fetchCompletionHandler:)``` method  in UIApplicationDelegate.
 
@@ -217,6 +293,7 @@ switch application.applicationState {
 ```
 
 ```swift 
+//Swift 2.3
 // Example
 func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
 if(application.applicationState == .Inactive ) {
@@ -241,6 +318,31 @@ For iOS 10 and above you could use UNUserNotificationCenterDelegate to control w
 	}
 completionHandler(.NewData)
 }
+
+//Swift 3.0
+func application(_ application: UIApplication,didReceiveRemoteNotification userInfo: [AnyHashable : Any],fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        if(application.applicationState == .inactive ) {
+            //User has interacted with a received notification. Inform Engage SDK a notification is opened
+            if let notificationData = Engage.onNotificationOpened(userInfo: userInfo) {
+                // Application can use the NotificationData object to perform any custom navigations , deep links etc.
+            }
+        }
+        else if (application.applicationState == .background) {
+            //Inform Engage SDK that an event has been recieved.
+            let notificationData = Engage.onNotificationRecieved(userInfo: userInfo)
+        }
+        else {
+            /*
+             Application is in Active State/ Foreground.
+             Inform Engage SDK that an event has been recieved.
+             Also ,since iOS won't be displaying a notification since application is already in foreground , application Developer can use the NotificationData object to show some custom inapp notifications or custom UI. if you are planning to show some custom UI / Inapp notifications , the you need to inform engage SDK if the user is interacted with that UI.
+             
+             For iOS 10 and above you could use UNUserNotificationCenterDelegate to control whether you need to show the notification when application is in foreground.
+             */
+            let notificationData = Engage.onNotificationRecieved(userInfo: userInfo)
+        }
+        completionHandler(.newData)
+    }
 ```
 
 ## Rich Push Notification Campaigns (iOS 10 and above)
@@ -299,9 +401,16 @@ Step 1: You need to inform Engage SDK that user has opened rich push notificatio
 
 You can validate whether the notification received is from Engage by checking for nil object ```Engage.onNotificationOpened``` returns.
 ```swift
+//Swift 2.3
 if let notificationData = Engage.onNotificationOpened(response.notification.request.content.userInfo) {
 //Notification from Engage
 }
+
+//Swift 3.0
+if let notificationData = Engage.onNotificationOpened(userInfo: response.notification.request.content.userInfo) {
+//Notification from Engage
+}
+
 ```
 
 Also application can use ```response.actionIdentifier``` to check whether user interacted by tapping on notification or any interactive buttons.
@@ -327,6 +436,30 @@ Call completion handler if you want to display the notification even if the user
  completionHandler([.Alert])
 }  
 } 
+
+//Swift 3.0
+
+extension AppDelegate : UNUserNotificationCenterDelegate {
+func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void){
+/* Called to let your app know which action was selected by the user for a given notification.Invoked when user taps on either notification or any custom interactive buttons in notifications.*/
+ if let notificationData = Engage.onNotificationOpened(userInfo: response.notification.request.content.userInfo) {
+ if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
+  //User has interacted with the notification.
+  }
+  else {
+  /*User has interacted with the notification interactive buttons.*/
+  }
+ }
+}
+    
+func userNotificationCenter(_ center: UNUserNotificationCenter,
+willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+/*Called when a notification is delivered to a foreground app.
+Call completion handler if you want to display the notification even if the user is in foreground.*/ 
+    completionHandler(.alert)
+}  
+}
+
 ```
 ### ShutDown User
 If a user logouts from your application , you need to inform the Engage SDK to stop tracking events as current user.
@@ -354,6 +487,21 @@ To use helper class please add them to your project. Please find the helper clas
 If you already integrated the FirebaseAnalytics , Just replace the calls that starts with `FIRAnalytics` with `EngageFIRAnalytics`.
 
 Example :
-`FIRAnalytics.logEventWithName(name, parameters: parameters)`   with 
-`EngageFIRAnalytics.logEventWithName(name, parameters: parameters)`
+
+Replace
+```swift 
+//Swift 2.3
+FIRAnalytics.logEventWithName(name, parameters: parameters)
+
+//Swift 3.0
+Analytics.logEvent(name, parameters: parameters)
+```
+  with 
+```swift 
+//Swift 2.3
+EngageFIRAnalytics.logEventWithName(name, parameters: parameters)
+
+//Swift 3.0
+EngageFIRAnalytics.logEventWithName(name: name, parameters: parameters)
+```
 
