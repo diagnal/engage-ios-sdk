@@ -8,6 +8,7 @@ Engage iOS SDK requires iOS 8.0 or higher.
 Engage iOS SDK now support swift 2.3 and swift 3.
 
 **Swift 2.3 Latest library version : 2.0.0**
+
 **Swift 3.0 Latest library version : 3.0.0**
 
 ## Resources
