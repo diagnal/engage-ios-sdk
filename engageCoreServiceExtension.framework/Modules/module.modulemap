@@ -7,4 +7,5 @@ framework module engageCoreServiceExtension {
 
 module engageCoreServiceExtension.Swift {
     header "engageCoreServiceExtension-Swift.h"
+    requires objc
 }
