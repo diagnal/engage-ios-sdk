@@ -5,15 +5,16 @@ It promotes content to users and access customer sentiment.
 
 Engage iOS SDK allows easy integration of Engage to your iOS application in a few steps.
 Engage iOS SDK requires iOS 8.0 or higher.
-Engage iOS SDK now support swift 2.3 and swift 3.
+Engage iOS SDK now support swift 2.3,swift 3 and swift 4.0
 
-**Swift 2.3 Latest library version : 2.0.0**
-
-**Swift 3.0 Latest library version : 3.0.0**
+**Swift 2.3 , Xcode 8.2.1 Latest SDK version : 2.0.0**
+**Swift 3.0 , Xcode 8 Latest SDK version : 3.0.0**
+**Swift 3.2 , Xcode 9 supported SDK version : 3.0.0**
+**Swift 4.0 , Xcode 9 Latest SDK version : 4.0.0**
 
 ## Resources
- - [engageCore Docs](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/Engage.html)
- - [engageExtensions Docs](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engageCoreServiceExtension-sdk-docs/index.html)
+ - engageCore Docs [swift 2.3](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/swift_2.3/engage-core/index.html) [swift 3/swift 4.0] (https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/swift_3/engage-core/index.html)
+ - engageExtensions Docs[swift 2.3](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/swift_2.3/engageCoreServiceExtension-sdk-docs/index.html) [swift 3 / swift 4.0] (https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/swift_3/engage-core/index.html)
 
 ## Getting Started
 ### Step 1: Install the Framework
