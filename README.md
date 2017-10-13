@@ -11,7 +11,7 @@
  
  **Swift 3.0 , Xcode 8 supported SDK version : 3.0.0**
  
- **Swift 3.2 , Xcode 9 supported SDK version : 3.0.0**
+ **Swift 3.2 , Xcode 9 supported SDK version : 3.2.0**
  
  **Swift 4.0 , Xcode 9  supported SDK version : 4.0.0**
  
