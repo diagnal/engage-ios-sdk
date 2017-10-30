@@ -833,8 +833,6 @@ SWIFT_CLASS("_TtC10engageCore6Traits")
 @property (nonatomic, copy) NSString * _Nullable network;
 /// String name of user
 @property (nonatomic, copy) NSString * _Nullable name;
-/// String value representing registration Status of user.
-@property (nonatomic, copy) NSString * _Nullable status;
 /// String value representing UserID of user.
 @property (nonatomic, copy) NSString * _Nullable id;
 /// A [String : String] dictionary representing custom user prfile informations.
