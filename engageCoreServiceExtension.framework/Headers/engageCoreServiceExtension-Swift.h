@@ -167,7 +167,17 @@ SWIFT_CLASS("_TtC26engageCoreServiceExtension34EngageNotificationServiceExtensio
 @property (nonatomic, strong) UNMutableNotificationContent * _Nullable modifiedContent;
 @property (nonatomic, strong) NSURLSessionDownloadTask * _Nullable downloadTask;
 @property (nonatomic, copy) void (^ _Nullable contentHandler)(UNNotificationContent * _Nonnull);
+/**
+  Called to let you know that there is a notification ready to be modified.
+  You can override this method to modify the content.
+  Make sure you call super.method to let engage sdk also use this method to process Engage Push Notifications
+*/
 - (void)didReceiveNotificationRequest:(UNNotificationRequest * _Nonnull)request withContentHandler:(void (^ _Nonnull)(UNNotificationContent * _Nonnull))contentHandler;
+/**
+  Called to let you know that your extension is about to be terminated.
+  You can override this method to  perform custom actions.
+  Make sure you call super.method to let engage sdk also use this method.
+*/
 - (void)serviceExtensionTimeWillExpire;
 - (NSURLSessionDownloadTask * _Nonnull)downloadTaskWithPayloadWithPayload:(EngageNotificationPayload * _Nonnull)payload;
 - (NSURL * _Nullable)processTempFileWithTempFileURL:(NSURL * _Nonnull)tempFileURL originalURL:(NSURL * _Nonnull)originalURL;
