@@ -262,7 +262,7 @@ SWIFT_CLASS("_TtC10engageCore20DownloadEventCreator")
 /// Creates EngageEvent representing content download paused
 ///
 /// \returns  EngageEvent representing content download paused
-- (EngageEvent * _Nonnull)onDownloadPaued;
+- (EngageEvent * _Nonnull)onDownloadPaused;
 
 /// Creates EngageEvent representing content download resumed
 ///
@@ -289,6 +289,7 @@ SWIFT_CLASS("_TtC10engageCore20DownloadEventCreator")
 @class Traits;
 @class NSData;
 @class NotificationData;
+@class NSURL;
 
 SWIFT_CLASS("_TtC10engageCore6Engage")
 @interface Engage : NSObject
@@ -368,6 +369,9 @@ SWIFT_CLASS("_TtC10engageCore6Engage")
 
 /// Shutdown the engage SDK. All functionalities related to SDK wil be stopped immediately after calling this method. Eg. It will clear all the user traits informations,stop tracking events, stops campaigns etc. Inorder to start the SDK functionality again , client application must call identify(traits : Traits) method.
 + (void)shutDown;
+
+/// You can track referrer to the application once the app is installed.
++ (void)setReferrer:(NSURL * _Nonnull)referrerUrl;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -409,6 +413,10 @@ SWIFT_CLASS("_TtC10engageCore11EngageEvent")
 @end
 
 
+@interface NSObject (SWIFT_EXTENSION(engageCore))
+@end
+
+
 @interface NSUserDefaults (SWIFT_EXTENSION(engageCore))
 @end
 
@@ -445,6 +453,9 @@ SWIFT_CLASS("_TtC10engageCore16NotificationData")
 
 /// Bool value representing whether the campaign recieved is a preview campaign
 @property (nonatomic, readonly) BOOL isCampaignPreview;
+
+/// Bool value representing whether the campaign recieved is a push preview campaign
+@property (nonatomic, readonly) BOOL isPushPreview;
 
 /// Campaign Id of preview campaign.
 @property (nonatomic, readonly, copy) NSString * _Nullable campaignPreviewId;
@@ -766,9 +777,6 @@ SWIFT_CLASS("_TtC10engageCore6Traits")
 /// emailID of user
 @property (nonatomic, copy) NSString * _Nullable email;
 
-/// String representing user network
-@property (nonatomic, copy) NSString * _Nullable network;
-
 /// String name of user
 @property (nonatomic, copy) NSString * _Nullable name;
 
@@ -777,7 +785,15 @@ SWIFT_CLASS("_TtC10engageCore6Traits")
 
 /// A [String : String] dictionary representing custom user prfile informations.
 @property (nonatomic, copy) NSDictionary<NSString *, NSString *> * _Nullable customTraits;
+
+/// String value representing phoneNumber of user.
 @property (nonatomic, copy) NSString * _Nullable phoneNumber;
+
+/// String value representing userNetwork of user.
+@property (nonatomic, copy) NSString * _Nullable userNetwork;
+
+/// String Value representing language
+@property (nonatomic, copy) NSString * _Nullable language;
 @end
 
 
