@@ -93,8 +93,9 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 #endif
 #if defined(__has_feature) && __has_feature(modules)
 @import ObjectiveC;
-@import Foundation;
 @import UIKit;
+@import UserNotifications;
+@import Foundation;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -290,6 +291,9 @@ SWIFT_CLASS("_TtC10engageCore20DownloadEventCreator")
 @class NSData;
 @class NotificationData;
 @class NSURL;
+@class UNUserNotificationCenter;
+@class UNNotification;
+@class UNNotificationResponse;
 
 SWIFT_CLASS("_TtC10engageCore6Engage")
 @interface Engage : NSObject
@@ -372,6 +376,10 @@ SWIFT_CLASS("_TtC10engageCore6Engage")
 
 /// You can track referrer to the application once the app is installed.
 + (void)setReferrer:(NSURL * _Nonnull)referrerUrl;
++ (void)applicationWillEnterForeground:(UIApplication * _Nonnull)application;
++ (NotificationData * _Nullable)application:(UIApplication * _Nonnull)application didReceiveRemoteNotification:(NSDictionary * _Nonnull)userInfo fetchCompletionHandler:(void (^ _Nonnull)(UIBackgroundFetchResult))completionHandler onNotificationAction:(void (^ _Nonnull)(NotificationData * _Nonnull))notificationAction;
++ (NotificationData * _Nullable)userNotificationCenter:(UNUserNotificationCenter * _Nonnull)center willPresentNotification:(UNNotification * _Nonnull)notification withCompletionHandler:(void (^ _Nonnull)(UNNotificationPresentationOptions))completionHandler;
++ (NotificationData * _Nullable)userNotificationCenter:(UNUserNotificationCenter * _Nonnull)center didReceiveNotificationResponse:(UNNotificationResponse * _Nonnull)response withCompletionHandler:(void (^ _Nonnull)(void))completionHandler onNotificationAction:(void (^ _Nonnull)(NSString * _Nonnull, NotificationData * _Nonnull))notificationAction;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -823,7 +831,7 @@ SWIFT_CLASS("_TtC10engageCore16UserEventCreator")
 /// Creates EngageEvent representing user login
 ///
 /// \returns  EngageEvent representing user login
-- (EngageEvent * _Nonnull)onUserLogin;
+- (EngageEvent * _Nonnull)onUserLogin:(BOOL)isAutoLogin;
 
 /// Creates EngageEvent representing user logout
 ///
