@@ -7,4 +7,5 @@ framework module engageCore {
 
 module engageCore.Swift {
     header "engageCore-Swift.h"
+    requires objc
 }
