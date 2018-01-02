@@ -425,11 +425,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL ENABLE_LOGGING;)
 /// \param enabled use true or false based on whether to show campaigns or not.
 ///
 + (void)setCampaignDialogsEnabledWithEnabled:(BOOL)enabled;
-/// Enables or disables Developer Mode of EngageMent SDK.
-/// ENABLE_CAPTURE_EVENTS is disabled by default
-/// \param enabled set true or false to enable/disable ENABLE_CAPTURE_EVENTS is SDK.
-///
-+ (void)ENABLE_CAPTURE_EVENTSWithEnabled:(BOOL)enabled;
 /// Register to engageSDK PushNotification Campaign
 /// Pass deviceToken to engage SDK after registering for push notifications.
 /// \param deviceToken deviceToken recieved from
