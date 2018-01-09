@@ -381,6 +381,7 @@ SWIFT_CLASS("_TtC10engageCore20DownloadEventCreator")
 @class UIApplication;
 @class Traits;
 @class NotificationData;
+@class MarketingConfig;
 @class UNUserNotificationCenter;
 @class UNNotification;
 @class UNNotificationResponse;
@@ -455,6 +456,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL ENABLE_LOGGING;)
 /// You can track referrer to the application once the app is installed.
 + (void)setReferrerWithReferrerUrl:(NSURL * _Nonnull)referrerUrl;
 + (void)applicationWillEnterForegroundWithApplication:(UIApplication * _Nonnull)application;
++ (void)setMarketingConfigurationWithConfiguration:(MarketingConfig * _Nonnull)configuration;
 + (NotificationData * _Nullable)applicationWithApplication:(UIApplication * _Nonnull)application didReceiveRemoteNotification:(NSDictionary * _Nonnull)userInfo fetchCompletionHandler:(SWIFT_NOESCAPE void (^ _Nonnull)(UIBackgroundFetchResult))completionHandler onNotificationAction:(SWIFT_NOESCAPE void (^ _Nonnull)(NotificationData * _Nonnull))notificationAction SWIFT_WARN_UNUSED_RESULT;
 + (NotificationData * _Nullable)userNotificationCenterWithCenter:(UNUserNotificationCenter * _Nonnull)center willPresentNotification:(UNNotification * _Nonnull)notification withCompletionHandler:(SWIFT_NOESCAPE void (^ _Nonnull)(UNNotificationPresentationOptions))completionHandler SWIFT_WARN_UNUSED_RESULT SWIFT_AVAILABILITY(ios,introduced=10.0);
 + (NotificationData * _Nullable)userNotificationCenterWithCenter:(UNUserNotificationCenter * _Nonnull)center didReceiveNotificationResponse:(UNNotificationResponse * _Nonnull)response withCompletionHandler:(SWIFT_NOESCAPE void (^ _Nonnull)(void))completionHandler onNotificationAction:(SWIFT_NOESCAPE void (^ _Nonnull)(NSString * _Nonnull, NotificationData * _Nonnull))notificationAction SWIFT_WARN_UNUSED_RESULT SWIFT_AVAILABILITY(ios,introduced=10.0);
@@ -489,6 +491,16 @@ SWIFT_CLASS("_TtC10engageCore11EngageEvent")
 /// returns:
 /// EngageEvent object after adding the attribute
 - (EngageEvent * _Nonnull)addAttributeWithName:(NSString * _Nonnull)name value:(id _Nonnull)value SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+SWIFT_CLASS("_TtC10engageCore15MarketingConfig")
+@interface MarketingConfig : NSObject
+@property (nonatomic) BOOL marketingConsent;
+@property (nonatomic) BOOL dndEmail;
+@property (nonatomic) BOOL dndSms;
+@property (nonatomic) BOOL dndPush;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
