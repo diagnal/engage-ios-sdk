@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name = 'engageCoreServiceExtension'
-    s.version = '3.2.6'
+    s.version = '3.2.7'
     s.summary = 'Engage App Extensions'
     s.homepage = 'https://github.com/diagnal/engage-ios-sdk'
     s.license = {:type => 'Commercial' , :file => 'LICENSE'}
