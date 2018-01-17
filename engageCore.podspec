@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'engageCore'
-  s.version = '3.2.7'
+  s.version = '3.2.8'
   s.author = 'Diagnal'
   s.license = {:type => 'Commercial' , :file => 'LICENSE'}
   s.homepage = 'https://github.com/diagnal/engage-ios-sdk'
