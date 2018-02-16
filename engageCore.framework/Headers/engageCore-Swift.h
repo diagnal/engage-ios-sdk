@@ -538,6 +538,8 @@ SWIFT_CLASS("_TtC10engageCore16NotificationData")
 @property (nonatomic, readonly, copy) NSDictionary * _Nullable notificationUserInfo;
 /// Bool value representing whether the campaign recieved is a push preview campaign
 @property (nonatomic, readonly) BOOL isPushPreview;
+/// User language from the notitication dictionary
+@property (nonatomic, readonly, copy) NSString * _Nullable previewLanguage;
 /// Disable default init method from outside.
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 /// Get instance of NotificationData from push notification userinfo dictionary.
