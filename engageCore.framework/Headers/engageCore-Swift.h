@@ -531,6 +531,8 @@ SWIFT_CLASS("_TtC10engageCore16NotificationData")
 @property (nonatomic, readonly, copy) NSString * _Nullable message;
 /// Bool value representing whether the campaign recieved is a preview campaign
 @property (nonatomic, readonly) BOOL isCampaignPreview;
+/// Bool value representing whether push is a sielent push for debugging purposes
+@property (nonatomic, readonly) BOOL isSilentPushForDebug;
 /// Campaign Id of preview campaign.
 @property (nonatomic, readonly, copy) NSString * _Nullable campaignPreviewId;
 @property (nonatomic, readonly, copy) NSArray<NotificationActions *> * _Nullable notificationActions;
