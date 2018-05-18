@@ -247,7 +247,7 @@ SWIFT_CLASS("_TtC10engageCore25AdvertisementEventCreator")
 SWIFT_CLASS("_TtC10engageCore23ApplicationEventCreator")
 @interface ApplicationEventCreator : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-- (EngageEvent * _Nonnull)onAppLaunch SWIFT_WARN_UNUSED_RESULT;
+- (EngageEvent * _Nonnull)onAppLaunchCompletion SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
