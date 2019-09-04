@@ -256,6 +256,7 @@ SWIFT_CLASS("_TtC10engageCore19NotificationActions")
 
 SWIFT_CLASS("_TtC10engageCore16NotificationData")
 @interface NotificationData : NSObject
+/// Disable default init method from outside.
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -287,6 +288,7 @@ SWIFT_CLASS("_TtC10engageCore18SearchEventCreator")
 
 SWIFT_CLASS("_TtC10engageCore6Traits")
 @interface Traits : NSObject
+/// To disable default init method.
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -568,6 +570,7 @@ SWIFT_CLASS("_TtC10engageCore19NotificationActions")
 
 SWIFT_CLASS("_TtC10engageCore16NotificationData")
 @interface NotificationData : NSObject
+/// Disable default init method from outside.
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -599,6 +602,7 @@ SWIFT_CLASS("_TtC10engageCore18SearchEventCreator")
 
 SWIFT_CLASS("_TtC10engageCore6Traits")
 @interface Traits : NSObject
+/// To disable default init method.
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
