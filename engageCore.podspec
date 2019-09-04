@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.ios.vendored_frameworks = 'engageCore.framework'
   s.platform     = :ios, '10.0'
   s.requires_arc = true
-  s.dependency "Alamofire",'~> 4.8.2'
+  s.dependency "Alamofire",'~> 4.9.0'
   s.dependency "AlamofireObjectMapper"
   s.dependency "SDVersion"
 end
