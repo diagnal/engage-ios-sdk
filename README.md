@@ -13,7 +13,7 @@ Engage iOS SDK now support swift 2.3 and swift 3.
 
 **Swift 5.0 Latest library version : 3.4.3**
 
-**Support for Xcode 11 Latest library version : 3.4.5**
+**Support for Xcode 11 Latest library version : 3.4.6**
 
 ## Resources
  - [engageCore Docs](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/Engage.html)
