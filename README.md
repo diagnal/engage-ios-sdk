@@ -5,7 +5,7 @@ It promotes content to users and access customer sentiment.
 
 Engage iOS SDK allows easy integration of Engage to your iOS application in a few steps.
 Engage iOS SDK requires iOS 8.0 or higher.
-Engage iOS SDK now support swift 2.3 and swift 3.
+Engage iOS SDK now support swift 5.1 and swift 5.2.
 
 **Swift 2.3 Latest library version : 2.0.0**
 
@@ -14,6 +14,8 @@ Engage iOS SDK now support swift 2.3 and swift 3.
 **Swift 5.0 Latest library version : 3.4.3**
 
 **Support for Xcode 11 Latest library version : 3.4.7**
+
+**Support for Xcode 11.2 Latest library version : 3.4.8**
 
 ## Resources
  - [engageCore Docs](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/Engage.html)
