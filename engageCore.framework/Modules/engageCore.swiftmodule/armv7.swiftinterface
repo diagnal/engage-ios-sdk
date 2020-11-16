@@ -1,0 +1,424 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.2.4 (swiftlang-1103.0.32.9 clang-1103.0.32.53)
+// swift-module-flags: -target armv7-apple-ios8.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name engageCore
+import AdSupport
+import Alamofire
+import AlamofireObjectMapper
+import CoreTelephony
+import Foundation
+import ObjectMapper
+import SDVersion
+import StoreKit
+import Swift
+import SystemConfiguration
+import UIKit
+import UserNotifications
+import WebKit
+@_exported import engageCore
+@objc @_inheritsConvenienceInitializers final public class Engage : ObjectiveC.NSObject {
+  public static var ENABLE_LOGGING: Swift.Bool
+  final public class func initialize(application: UIKit.UIApplication, didFinishLaunchingWithOptions launchOptions: [UIKit.UIApplication.LaunchOptionsKey : Any]?, accountId: Swift.String, projectId: Swift.String, customCSSUrl: Swift.String? = nil)
+  final public class func identify(traits: engageCore.Traits)
+  final public class func track(eventName: Swift.String, params: [Swift.AnyHashable : Any])
+  final public class func track(event: engageCore.EngageEvent)
+  final public class func setCampaignDialogsEnabled(enabled: Swift.Bool)
+  final public class func registerForRemoteNotificationsWithDeviceToken(deviceToken: Foundation.Data)
+  final public class func onNotificationRecieved(userInfo: [Swift.AnyHashable : Any]) -> engageCore.NotificationData?
+  final public class func onNotificationOpened(userInfo: [Swift.AnyHashable : Any]) -> engageCore.NotificationData?
+  final public class func shutDown()
+  final public class func registerForCampaignEvents(campaignEventDelegate: engageCore.CampaignEventDelegate)
+  final public class func setReferrer(referrerUrl: Foundation.URL)
+  final public class func connectionEnviornment(enviornment: Swift.Int)
+  final public class func DEMOMODE(enabled: Swift.Bool)
+  final public class func applicationWillEnterForeground(application: UIKit.UIApplication)
+  final public class func setMarketingConfiguration(configuration: engageCore.MarketingConfig)
+  final public class func application(application: UIKit.UIApplication, didReceiveRemoteNotification userInfo: [Swift.AnyHashable : Any], fetchCompletionHandler completionHandler: (UIKit.UIBackgroundFetchResult) -> Swift.Void, onNotificationAction notificationAction: (engageCore.NotificationData) -> Swift.Void) -> engageCore.NotificationData?
+  @available(iOS 10.0, *)
+  final public class func userNotificationCenter(center: UserNotifications.UNUserNotificationCenter, willPresentNotification notification: UserNotifications.UNNotification, withCompletionHandler completionHandler: (UserNotifications.UNNotificationPresentationOptions) -> Swift.Void) -> engageCore.NotificationData?
+  @available(iOS 10.0, *)
+  final public class func userNotificationCenter(center: UserNotifications.UNUserNotificationCenter, didReceiveNotificationResponse response: UserNotifications.UNNotificationResponse, withCompletionHandler completionHandler: () -> Swift.Void, onNotificationAction notificationAction: (Swift.String, engageCore.NotificationData) -> Swift.Void) -> engageCore.NotificationData?
+  @objc deinit
+  @objc override dynamic public init()
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class ContentEventCreator : ObjectiveC.NSObject {
+  public init(contentId: Swift.String)
+  public func putTitle(title: Swift.String) -> engageCore.ContentEventCreator
+  public func putType(type: Swift.String) -> engageCore.ContentEventCreator
+  public func putSource(source: Swift.String) -> engageCore.ContentEventCreator
+  public func onContentView() -> engageCore.EngageEvent
+  public func onContentShare() -> engageCore.EngageEvent
+  public func onContentShareWith(sharedWith: Swift.String) -> engageCore.EngageEvent
+  public func onContentAddedToFavourites() -> engageCore.EngageEvent
+  public func onContentFavouriteRemoved() -> engageCore.EngageEvent
+  public func onContentFavouritesCleared() -> engageCore.EngageEvent
+  @objc deinit
+}
+public enum KeychainItemAccessibility {
+  @available(iOS 4, *)
+  case afterFirstUnlock
+  @available(iOS 4, *)
+  case afterFirstUnlockThisDeviceOnly
+  @available(iOS 4, *)
+  case always
+  @available(iOS 8, *)
+  case whenPasscodeSetThisDeviceOnly
+  @available(iOS 4, *)
+  case alwaysThisDeviceOnly
+  @available(iOS 4, *)
+  case whenUnlocked
+  @available(iOS 4, *)
+  case whenUnlockedThisDeviceOnly
+  public static func == (a: engageCore.KeychainItemAccessibility, b: engageCore.KeychainItemAccessibility) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@objc @_inheritsConvenienceInitializers public class ApplicationEventCreator : ObjectiveC.NSObject {
+  @objc override dynamic public init()
+  public func onAppLaunchCompletion() -> engageCore.EngageEvent
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class PlayerEventCreator : ObjectiveC.NSObject {
+  public init(contentId: Swift.String)
+  public func putContentType(type: Swift.String) -> engageCore.PlayerEventCreator
+  public func putContentTitle(title: Swift.String) -> engageCore.PlayerEventCreator
+  public func putDisplayMode(mode: Swift.String) -> engageCore.PlayerEventCreator
+  public func putDuration(duration: Swift.Double) -> engageCore.PlayerEventCreator
+  public func putContentVideoQuality(videoQuality: Swift.String) -> engageCore.PlayerEventCreator
+  public func putProgress(progress: Swift.Double) -> engageCore.PlayerEventCreator
+  public func putStartTime(time: Swift.Double) -> engageCore.PlayerEventCreator
+  public func putEndTime(time: Swift.Double) -> engageCore.PlayerEventCreator
+  public func putSubtitleLanguage(aLangCode: Swift.String) -> engageCore.PlayerEventCreator
+  public func putAudioLanguage(aLangCode: Swift.String) -> engageCore.PlayerEventCreator
+  public func putGenre(genre: Swift.String) -> engageCore.PlayerEventCreator
+  public func onPlaybackStarted() -> engageCore.EngageEvent
+  public func onPlaybackResumed() -> engageCore.EngageEvent
+  public func onPlaybackPaused() -> engageCore.EngageEvent
+  public func onPlaybackBuffering() -> engageCore.EngageEvent
+  public func onPlaybackSeek() -> engageCore.EngageEvent
+  public func onPlaybackStopped() -> engageCore.EngageEvent
+  public func onPlaybackCompleted() -> engageCore.EngageEvent
+  public func onPlaybackError() -> engageCore.EngageEvent
+  public func onTrackChange() -> engageCore.EngageEvent
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class EngageEvent : ObjectiveC.NSObject {
+  public init(aEventName: Swift.String)
+  public func addAttribute(name: Swift.String, value: Swift.AnyObject) -> engageCore.EngageEvent
+  @objc deinit
+}
+public enum GENDER {
+  case MALE
+  case FEMALE
+  case OTHER
+  public static func == (a: engageCore.GENDER, b: engageCore.GENDER) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum REGISTRATIONSTATUS {
+  case REGISTERED
+  case ANONYMOUS
+  case SUBSCRIBED
+  public static func == (a: engageCore.REGISTRATIONSTATUS, b: engageCore.REGISTRATIONSTATUS) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers final public class Traits : ObjectiveC.NSObject {
+  final public var age: Swift.Int?
+  final public var gender: engageCore.GENDER?
+  final public var email: Swift.String?
+  final public var name: Swift.String?
+  final public var status: engageCore.REGISTRATIONSTATUS?
+  final public var id: Swift.String?
+  final public var customTraits: [Swift.String : Swift.String]?
+  final public var phoneNumber: Swift.String?
+  final public var userNetwork: Swift.String?
+  final public var language: Swift.String?
+  public init(id: Swift.String? = nil, name: Swift.String? = nil, email: Swift.String? = nil, gender: engageCore.GENDER? = nil, age: Swift.Int? = nil, status: engageCore.REGISTRATIONSTATUS? = nil, phoneNumber: Swift.String? = nil, language: Swift.String? = nil, network: Swift.String? = nil, customTraits: [Swift.String : Swift.String]? = nil)
+  @objc deinit
+}
+public protocol CampaignEventDelegate {
+  func onCampaignTriggered(campaign: engageCore.EngageCampaign) -> Swift.Bool
+  func onCampaignAction(campaign: engageCore.EngageCampaign)
+}
+public enum ReachabilityError : Swift.Error {
+  case FailedToCreateWithAddress(Darwin.sockaddr_in)
+  case FailedToCreateWithHostname(Swift.String)
+  case UnableToSetCallback
+  case UnableToSetDispatchQueue
+}
+@available(*, unavailable, renamed: "Notification.Name.reachabilityChanged")
+public let ReachabilityChangedNotification: Foundation.NSNotification.Name
+extension NSNotification.Name {
+  public static let reachabilityChanged: Foundation.Notification.Name
+}
+public class Reachability {
+  public typealias NetworkReachable = (engageCore.Reachability) -> ()
+  public typealias NetworkUnreachable = (engageCore.Reachability) -> ()
+  @available(*, unavailable, renamed: "Conection")
+  public enum NetworkStatus : Swift.CustomStringConvertible {
+    case notReachable, reachableViaWiFi, reachableViaWWAN
+    public var description: Swift.String {
+      get
+    }
+    public static func == (a: engageCore.Reachability.NetworkStatus, b: engageCore.Reachability.NetworkStatus) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  public enum Connection : Swift.CustomStringConvertible {
+    case none, wifi, cellular
+    public var description: Swift.String {
+      get
+    }
+    public static func == (a: engageCore.Reachability.Connection, b: engageCore.Reachability.Connection) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  public var whenReachable: engageCore.Reachability.NetworkReachable?
+  public var whenUnreachable: engageCore.Reachability.NetworkUnreachable?
+  final public let reachableOnWWAN: Swift.Bool
+  public var allowsCellularConnection: Swift.Bool
+  public var notificationCenter: Foundation.NotificationCenter
+  public var currentReachabilityString: Swift.String {
+    get
+  }
+  @available(*, unavailable, renamed: "connection")
+  public var currentReachabilityStatus: engageCore.Reachability.Connection {
+    get
+  }
+  public var connection: engageCore.Reachability.Connection {
+    get
+  }
+  required public init(reachabilityRef: SystemConfiguration.SCNetworkReachability)
+  convenience public init?(hostname: Swift.String)
+  convenience public init?()
+  @objc deinit
+}
+extension Reachability {
+  public func startNotifier() throws
+  public func stopNotifier()
+  public var isReachable: Swift.Bool {
+    get
+  }
+  public var isReachableViaWWAN: Swift.Bool {
+    get
+  }
+  public var isReachableViaWiFi: Swift.Bool {
+    get
+  }
+  public var description: Swift.String {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class AdvertisementEventCreator : ObjectiveC.NSObject {
+  public init(contentId: Swift.String, advertisementId: Swift.String)
+  public func putAdType(type: Swift.String) -> engageCore.AdvertisementEventCreator
+  public func putAdDuration(duration: Swift.String) -> engageCore.AdvertisementEventCreator
+  public func putAdProgress(type: Swift.String) -> engageCore.AdvertisementEventCreator
+  public func onAdPlaybackStarted() -> engageCore.EngageEvent
+  public func onAdPlaybackCompleted() -> engageCore.EngageEvent
+  public func onAdPlaybackSkipped() -> engageCore.EngageEvent
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class DownloadEventCreator : ObjectiveC.NSObject {
+  public init(contentId: Swift.String)
+  public func putContentTitle(title: Swift.String) -> engageCore.DownloadEventCreator
+  public func putContentType(type: Swift.String) -> engageCore.DownloadEventCreator
+  public func putContentSource(source: Swift.String) -> engageCore.DownloadEventCreator
+  public func onDownloadStarted() -> engageCore.EngageEvent
+  public func onDownloadPaused() -> engageCore.EngageEvent
+  public func onDownloadResumed() -> engageCore.EngageEvent
+  public func onDownloadStopped() -> engageCore.EngageEvent
+  public func onDownloadCompleted() -> engageCore.EngageEvent
+  public func onDownloadError() -> engageCore.EngageEvent
+  @objc deinit
+}
+public enum CampaignType : Swift.String {
+  case CTA_PAGE_TAKEOVER
+  case CTA_MODAL
+  case CTA_BAR
+  case CTA_SHARING
+  case SURVEY_MULTIPLE_CHOICE
+  case SURVEY_USER_FEEDBACK
+  case SURVEY_RATING
+  case VIDEO_MODAL
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.String)
+}
+@objc @_inheritsConvenienceInitializers public class EngageCampaign : ObjectiveC.NSObject {
+  public var actionString: Swift.String?
+  public var campaignId: Swift.String?
+  public var type: engageCore.CampaignType?
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class SearchEventCreator : ObjectiveC.NSObject {
+  @objc override dynamic public init()
+  public func onSearch(keyword: Swift.String) -> engageCore.EngageEvent
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class NotificationData : ObjectiveC.NSObject {
+  public var campaignId: Swift.String? {
+    get
+  }
+  public var type: Swift.String? {
+    get
+  }
+  public var url: Swift.String? {
+    get
+  }
+  public var title: Swift.String? {
+    get
+  }
+  public var subTitle: Swift.String? {
+    get
+  }
+  public var message: Swift.String? {
+    get
+  }
+  public var isCampaignPreview: Swift.Bool {
+    get
+  }
+  public var isSilentPushForDebug: Swift.Bool {
+    get
+  }
+  public var campaignPreviewId: Swift.String? {
+    get
+  }
+  public var notificationActions: [engageCore.NotificationActions]? {
+    get
+  }
+  public var notificationUserInfo: [Swift.AnyHashable : Any]? {
+    get
+  }
+  public var isPushPreview: Swift.Bool {
+    get
+  }
+  public var previewLanguage: Swift.String? {
+    get
+  }
+  public static func getNotificationData(remoteNotificationUserInfo: [Swift.AnyHashable : Any]) -> engageCore.NotificationData?
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class NotificationActions : ObjectiveC.NSObject {
+  public var identifier: Swift.String? {
+    get
+  }
+  public var title: Swift.String? {
+    get
+  }
+  public var actionString: Swift.String? {
+    get
+  }
+  @objc deinit
+  @objc override dynamic public init()
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class UserEventCreator : ObjectiveC.NSObject {
+  public init(userId: Swift.String)
+  public func onUserRegistered() -> engageCore.EngageEvent
+  public func onUserLogin(isAutoLogin: Swift.Bool) -> engageCore.EngageEvent
+  public func onUserLogout() -> engageCore.EngageEvent
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class MarketingConfig : ObjectiveC.NSObject {
+  public var marketingConsent: Swift.Bool
+  public var dndEmail: Swift.Bool
+  public var dndSms: Swift.Bool
+  public var dndPush: Swift.Bool
+  @objc deinit
+  @objc override dynamic public init()
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class PurchaseEventCreator : ObjectiveC.NSObject {
+  public init(productId: Swift.String)
+  public func putProductTitle(title: Swift.String) -> engageCore.PurchaseEventCreator
+  public func putProductPrice(price: Swift.String) -> engageCore.PurchaseEventCreator
+  public func putCurrency(currency: Swift.String) -> engageCore.PurchaseEventCreator
+  public func putProductType(type: Swift.String) -> engageCore.PurchaseEventCreator
+  public func putOrderId(orderId: Swift.String) -> engageCore.PurchaseEventCreator
+  public func putPaymentMode(paymentMode: Swift.String) -> engageCore.PurchaseEventCreator
+  public func putCardType(type: Swift.String) -> engageCore.PurchaseEventCreator
+  public func putBankName(bankName: Swift.String) -> engageCore.PurchaseEventCreator
+  public func putTransactionId(id: Swift.String) -> engageCore.PurchaseEventCreator
+  public func putStoreName(storeName: Swift.String) -> engageCore.PurchaseEventCreator
+  public func putPromoCode(promoCode: Swift.String) -> engageCore.PurchaseEventCreator
+  public func putOriginalOrderId(id: Swift.String) -> engageCore.PurchaseEventCreator
+  public func putOriginalTransactionId(id: Swift.String) -> engageCore.PurchaseEventCreator
+  public func putValidityDays(validityDays: Swift.String) -> engageCore.PurchaseEventCreator
+  public func putRemainingDays(remainingDays: Swift.String) -> engageCore.PurchaseEventCreator
+  public func onProductSelected() -> engageCore.EngageEvent
+  public func onProductCheckout() -> engageCore.EngageEvent
+  public func onProductRenew() -> engageCore.EngageEvent
+  public func onProductUpgrade() -> engageCore.EngageEvent
+  public func onProductCheckoutSuccess() -> engageCore.EngageEvent
+  public func onProductCheckoutFailed() -> engageCore.EngageEvent
+  @objc deinit
+}
+open class KeychainWrapper {
+  public static let defaultKeychainWrapper: engageCore.KeychainWrapper
+  public static let standard: engageCore.KeychainWrapper
+  public var serviceName: Swift.String {
+    get
+  }
+  public var accessGroup: Swift.String? {
+    get
+  }
+  public init(serviceName: Swift.String, accessGroup: Swift.String? = nil)
+  open func hasValue(forKey key: Swift.String, withAccessibility accessibility: engageCore.KeychainItemAccessibility? = nil) -> Swift.Bool
+  open func accessibilityOfKey(_ key: Swift.String) -> engageCore.KeychainItemAccessibility?
+  open func integer(forKey key: Swift.String, withAccessibility accessibility: engageCore.KeychainItemAccessibility? = nil) -> Swift.Int?
+  open func float(forKey key: Swift.String, withAccessibility accessibility: engageCore.KeychainItemAccessibility? = nil) -> Swift.Float?
+  open func double(forKey key: Swift.String, withAccessibility accessibility: engageCore.KeychainItemAccessibility? = nil) -> Swift.Double?
+  open func bool(forKey key: Swift.String, withAccessibility accessibility: engageCore.KeychainItemAccessibility? = nil) -> Swift.Bool?
+  open func string(forKey key: Swift.String, withAccessibility accessibility: engageCore.KeychainItemAccessibility? = nil) -> Swift.String?
+  open func object(forKey key: Swift.String, withAccessibility accessibility: engageCore.KeychainItemAccessibility? = nil) -> Foundation.NSCoding?
+  open func data(forKey key: Swift.String, withAccessibility accessibility: engageCore.KeychainItemAccessibility? = nil) -> Foundation.Data?
+  open func dataRef(forKey key: Swift.String, withAccessibility accessibility: engageCore.KeychainItemAccessibility? = nil) -> Foundation.Data?
+  @discardableResult
+  open func set(_ value: Swift.Int, forKey key: Swift.String, withAccessibility accessibility: engageCore.KeychainItemAccessibility? = nil) -> Swift.Bool
+  @discardableResult
+  open func set(_ value: Swift.Float, forKey key: Swift.String, withAccessibility accessibility: engageCore.KeychainItemAccessibility? = nil) -> Swift.Bool
+  @discardableResult
+  open func set(_ value: Swift.Double, forKey key: Swift.String, withAccessibility accessibility: engageCore.KeychainItemAccessibility? = nil) -> Swift.Bool
+  @discardableResult
+  open func set(_ value: Swift.Bool, forKey key: Swift.String, withAccessibility accessibility: engageCore.KeychainItemAccessibility? = nil) -> Swift.Bool
+  @discardableResult
+  open func set(_ value: Swift.String, forKey key: Swift.String, withAccessibility accessibility: engageCore.KeychainItemAccessibility? = nil) -> Swift.Bool
+  @discardableResult
+  open func set(_ value: Foundation.NSCoding, forKey key: Swift.String, withAccessibility accessibility: engageCore.KeychainItemAccessibility? = nil) -> Swift.Bool
+  @discardableResult
+  open func set(_ value: Foundation.Data, forKey key: Swift.String, withAccessibility accessibility: engageCore.KeychainItemAccessibility? = nil) -> Swift.Bool
+  @discardableResult
+  open func remove(key: Swift.String, withAccessibility accessibility: engageCore.KeychainItemAccessibility? = nil) -> Swift.Bool
+  @discardableResult
+  open func removeObject(forKey key: Swift.String, withAccessibility accessibility: engageCore.KeychainItemAccessibility? = nil) -> Swift.Bool
+  open func removeAllKeys() -> Swift.Bool
+  open class func wipeKeychain()
+  @objc deinit
+}
+extension engageCore.KeychainItemAccessibility : Swift.Equatable {}
+extension engageCore.KeychainItemAccessibility : Swift.Hashable {}
+extension engageCore.GENDER : Swift.Equatable {}
+extension engageCore.GENDER : Swift.Hashable {}
+extension engageCore.REGISTRATIONSTATUS : Swift.Equatable {}
+extension engageCore.REGISTRATIONSTATUS : Swift.Hashable {}
+@available(*, unavailable, renamed: "Conection")
+extension engageCore.Reachability.NetworkStatus : Swift.Equatable {}
+@available(*, unavailable, renamed: "Conection")
+extension engageCore.Reachability.NetworkStatus : Swift.Hashable {}
+extension engageCore.Reachability.Connection : Swift.Equatable {}
+extension engageCore.Reachability.Connection : Swift.Hashable {}
+extension engageCore.CampaignType : Swift.Equatable {}
+extension engageCore.CampaignType : Swift.Hashable {}
+extension engageCore.CampaignType : Swift.RawRepresentable {}
