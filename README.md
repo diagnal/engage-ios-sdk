@@ -23,6 +23,8 @@ Engage iOS SDK now support swift 5.1 and swift 5.2.
 
 **Support for Xcode 12.2 (Swift 5.3) Latest library version : 3.5.8**
 
+**Support for Xcode 12.2 (Swift 5.3) Latest library version : 3.5.9**
+
 ## Resources
  - [engageCore Docs](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engage-core/Classes/Engage.html)
  - [engageExtensions Docs](https://diagnal-engage.s3.amazonaws.com/engage-ios-sdk-docs/engageCoreServiceExtension-sdk-docs/index.html)
